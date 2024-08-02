@@ -5,6 +5,7 @@ import { Checkbox } from "@nextui-org/checkbox";
 import { useState } from "react";
 import { Button } from "@nextui-org/button";
 import { Link } from "react-router-dom";
+import ls from "../assets/ls.svg";
 
 const SignIn = () => {
    const [email, setEmail] = useState("");
@@ -12,9 +13,13 @@ const SignIn = () => {
    return (
       <AppLayout>
          <div className="w-full mx-auto min-h-screen flex justify-center items-center px-5">
+            <div className="fixed top-0 left-0 h-screen w-screen">
+               <img src={ls} className="w-full h-full" />
+            </div>
             <Card
+               isBlurred
+               className="bg-transparent shadow-lg shadow-[#300000] h-fit px-5 py-2"
                radius="sm"
-               className="bg-transparent md:w-[30rem] px-4 py-2 shadow-secondary-900/45 shadow-md h-[500px]"
             >
                <CardHeader className="flex flex-col items-start">
                   <span>Hello</span>
@@ -29,23 +34,24 @@ const SignIn = () => {
                            size="sm"
                            type="email"
                            label="Email"
-                           radius="sm"
+                           radius="lg"
                            color="default"
-                           variant="flat"
+                           variant="bordered"
                         />
                         <Input
                            size="sm"
                            type={isShow ? "text" : "password"}
                            label="Password"
-                           radius="sm"
-                           variant="flat"
+                           radius="lg"
+                           variant="bordered"
                            color="default"
                         />
-                        <div className="flex justify-between items-center">
+                        <div className="flex flex-col sm:flex-row justify-between">
                            <Checkbox
                               onChange={() => setShow((e) => !e)}
                               defaultChecked={isShow}
                               size="sm"
+                              className="text-xs"
                            >
                               Show Password
                            </Checkbox>
@@ -59,7 +65,12 @@ const SignIn = () => {
                      </div>
 
                      <div className="flex justify-center items-center w-full">
-                        <Button type="submit" color="default">
+                        <Button
+                           type="submit"
+                           color="primary"
+                           variant="shadow"
+                           className="text-primary-900"
+                        >
                            Sign In
                         </Button>
                      </div>
