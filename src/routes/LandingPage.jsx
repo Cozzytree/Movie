@@ -21,7 +21,7 @@ const LandingPage = () => {
                   </Link>
                </div>
                <Button variant="shadow" color="primary" radius="sm" size="sm">
-                  <Link to={"/signin"}>SIGN IN</Link>
+                  <Link to={"/sign_in"}>SIGN IN</Link>
                </Button>
             </div>
 
