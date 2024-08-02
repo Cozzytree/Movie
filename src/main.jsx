@@ -10,7 +10,7 @@ import SignIn from "./routes/Signin";
 
 const router = createBrowserRouter([
    { element: <LandingPage />, path: "/", children: [] },
-   { element: <SignIn />, path: "/signin", children: [] },
+   { element: <SignIn />, path: "/sign_in", children: [] },
    { element: <SignUp />, path: "/sign_up", children: [] },
 ]);
 
