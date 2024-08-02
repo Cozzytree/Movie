@@ -1,11 +1,6 @@
-import { Button } from "@nextui-org/button";
 import { Card, CardBody, CardFooter } from "@nextui-org/card";
-import { DropdownItem } from "@nextui-org/dropdown";
-import { Dropdown, DropdownMenu, DropdownTrigger } from "@nextui-org/dropdown";
 import { Image } from "@nextui-org/image";
 import { BiStar } from "react-icons/bi";
-import { BsStars } from "react-icons/bs";
-import { CiFilter } from "react-icons/ci";
 import MovieFilter from "../components/MovieFilter";
 
 const recommended = [
