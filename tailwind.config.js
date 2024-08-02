@@ -57,6 +57,7 @@ export default {
          },
          fontFamily: {
             sans: ["var(--font-sans)"],
+            poppins: "poppins",
          },
          keyframes: {
             "accordion-down": {

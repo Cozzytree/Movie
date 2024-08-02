@@ -3,6 +3,7 @@ import AppLayout from "../components/AppLayout";
 import { Input } from "@nextui-org/input";
 import { Button } from "@nextui-org/button";
 import { Link } from "react-router-dom";
+import ls from "../assets/ls.svg";
 
 const inputs = [
    { type: "email", label: "Enter your email" },
@@ -14,9 +15,12 @@ const SignUp = () => {
    return (
       <AppLayout>
          <div className="flex w-full h-screen justify-center items-center">
+            <div className="fixed top-0 left-0 h-screen w-screen">
+               <img src={ls} className="w-full h-full" />
+            </div>
             <Card
                isBlurred
-               className="bg-transparent h-fit px-5 py-2 shadow-secondary-900/40 shadow-md"
+               className="bg-transparent shadow-lg shadow-[#300000] h-fit px-5 py-2"
                radius="sm"
             >
                <CardHeader>
@@ -40,15 +44,21 @@ const SignUp = () => {
                               }
                               type={v.type}
                               variant="underlined"
-                              size="md"
+                              size="sm"
                               placeholder={v.label}
                               labelPlacement="outside"
+                              className="text-xs"
                            />
                         ))}
                      </div>
                      <div className="w-full flex justify-center items-center">
-                        <Button variant="shadow" color="secondary" size="md">
-                           Sign Up
+                        <Button
+                           type="submit"
+                           color="primary"
+                           variant="shadow"
+                           className="text-primary-900"
+                        >
+                           Sign In
                         </Button>
                      </div>
                   </form>
@@ -58,7 +68,7 @@ const SignUp = () => {
                      ALready have an account ?{" "}
                      <Link
                         to={"/sign_in"}
-                        className="text-sm text-purple-400 hover:underline transition-all"
+                        className="text-sm text-primary-400 hover:underline transition-all"
                      >
                         Sign In
                      </Link>
