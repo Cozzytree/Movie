@@ -12,13 +12,10 @@ const SignIn = () => {
    const [isShow, setShow] = useState(false);
    return (
       <AppLayout>
-         <div className="w-full mx-auto min-h-screen flex justify-center items-center px-5">
-            <div className="fixed top-0 left-0 h-screen w-screen">
-               <img src={ls} className="w-full h-full" />
-            </div>
+         <div className="w-full mx-auto min-h-screen flex justify-center items-center px-5 overflow-hidden">
             <Card
                isBlurred
-               className="bg-transparent shadow-lg shadow-[#300000] h-fit px-5 py-2"
+               className="bg-transparent h-fit px-5 py-2"
                radius="sm"
             >
                <CardHeader className="flex flex-col items-start">

@@ -9,50 +9,52 @@ const days = {
    time: ["9:00", "11:30", "14:00"],
 };
 
+const seatDetails = ["Sold", "Available", "Selected"];
+
 const cinemaSeats = [
    {
       group: "A",
       s: [
-         { row: 1, seat: 1, isAvailable: true },
-         { row: 1, seat: 2, isAvailable: false },
-         { row: 1, seat: 3, isAvailable: true },
-         { row: 1, seat: 4, isAvailable: true },
+         { row: 1, seat: 1, isAvailable: true, id: 1 },
+         { row: 1, seat: 2, isAvailable: false, id: 2 },
+         { row: 1, seat: 3, isAvailable: true, id: 3 },
+         { row: 1, seat: 4, isAvailable: true, id: 4 },
       ],
    },
    {
       group: "B",
       s: [
-         { row: 2, seat: 1, isAvailable: true },
-         { row: 2, seat: 2, isAvailable: true },
-         { row: 2, seat: 3, isAvailable: false },
-         { row: 2, seat: 4, isAvailable: true },
+         { row: 2, seat: 1, isAvailable: true, id: 5 },
+         { row: 2, seat: 2, isAvailable: true, id: 6 },
+         { row: 2, seat: 3, isAvailable: false, id: 7 },
+         { row: 2, seat: 4, isAvailable: true, id: 8 },
       ],
    },
    {
       group: "C",
       s: [
-         { row: 3, seat: 1, isAvailable: false },
-         { row: 3, seat: 2, isAvailable: true },
-         { row: 3, seat: 3, isAvailable: true },
-         { row: 3, seat: 4, isAvailable: false },
+         { row: 3, seat: 1, isAvailable: false, id: 9 },
+         { row: 3, seat: 2, isAvailable: true, id: 10 },
+         { row: 3, seat: 3, isAvailable: true, id: 11 },
+         { row: 3, seat: 4, isAvailable: false, id: 12 },
       ],
    },
    {
       group: "D",
       s: [
-         { row: 4, seat: 1, isAvailable: true },
-         { row: 4, seat: 2, isAvailable: true },
-         { row: 4, seat: 3, isAvailable: true },
-         { row: 4, seat: 4, isAvailable: true },
+         { row: 4, seat: 1, isAvailable: true, id: 13 },
+         { row: 4, seat: 2, isAvailable: true, id: 14 },
+         { row: 4, seat: 3, isAvailable: true, id: 15 },
+         { row: 4, seat: 4, isAvailable: true, id: 16 },
       ],
    },
    {
       group: "E",
       s: [
-         { row: 5, seat: 1, isAvailable: false },
-         { row: 5, seat: 2, isAvailable: true },
-         { row: 5, seat: 3, isAvailable: true },
-         { row: 5, seat: 4, isAvailable: false },
+         { row: 5, seat: 1, isAvailable: false, id: 17 },
+         { row: 5, seat: 2, isAvailable: true, id: 18 },
+         { row: 5, seat: 3, isAvailable: true, id: 19 },
+         { row: 5, seat: 4, isAvailable: false, id: 20 },
       ],
    },
 ];
@@ -68,11 +70,27 @@ const cinemaSeats = [
 
 const SeatSelection = () => {
    const [curTime, setCurTime] = useState(days.time[0]);
-   const reversedSeats = [...cinemaSeats].reverse();
+   // const reversedSeats = [...cinemaSeats].reverse();
+   const [bookId, setBookId] = useState([]);
+
+   const handleClick = (seatId) => {
+      console.log(seatId);
+      if (seatId.isAvailable) {
+         setBookId((prevId) => {
+            // Create a new array based on the previous state
+            const newBookId = prevId.includes(seatId)
+               ? prevId.filter((id) => id !== seatId) // Remove the ID if it exists
+               : [...prevId, seatId]; // Add the ID if it doesn't exist
+
+            //console.log(newBookId); // Log the new state for debugging
+            return newBookId;
+         });
+      }
+   };
 
    return (
       <AppLayout>
-         <div className="flex flex-col sm:container mx-auto h-screen items-center gap-5 py-6 px-4">
+         <div className="flex flex-col sm:container mx-auto h-screen items-center gap-5 py-6 px-4 relative">
             <div className="flex gap-2 justify-center items-center">
                <p className="text-sm text-nowrap">
                   {new Intl.DateTimeFormat("en-GB", {
@@ -87,6 +105,7 @@ const SeatSelection = () => {
                >
                   {days.time.map((t) => (
                      <option
+                        key={t}
                         className="transition-all duration-150 bg-primary-500/40"
                         value={t}
                      >
@@ -97,30 +116,50 @@ const SeatSelection = () => {
             </div>
 
             <div className="w-full flex flex-col justify-center items-center gap-3">
-               {reversedSeats.map((seat, index) => (
+               {cinemaSeats.map((seat, index) => (
                   <div
                      key={index}
                      className="gap-3 place-items-center grid grid-cols-[auto_1fr_auto]"
                   >
                      <p>{seat.group}</p>
                      <ul className="flex gap-1">
-                        {seat.s.map((s, i) => (
-                           <li key={i}>
-                              <Button
-                                 isDisabled={s.isAvailable}
-                                 size="sm"
-                                 color="secondary"
-                                 variant={`${s.isAvailable ? "solid" : "bordered"}`}
-                                 className="rounded-md"
+                        {seat.s.map((s) => (
+                           <li key={s.id} className="">
+                              <button
+                                 disabled={!s.isAvailable}
+                                 onClick={() => handleClick(s)}
+                                 className={`w-11 h-11 rounded-md ${bookId.includes(s) && "bg-green-500 text-green-950"} ${!s.isAvailable ? "bg-zinc-700 border-none text-zinc-500" : "border-1 border-zinc-600"}`}
                               >
                                  {s.seat}
-                              </Button>
+                              </button>
                            </li>
                         ))}
                      </ul>
                      <p>{seat.group}</p>
                   </div>
                ))}
+            </div>
+
+            <div className="flex w-full flex-col gap-1">
+               <ul className="flex justify-center w-full items-center gap-4">
+                  {seatDetails.map((s) => (
+                     <li
+                        key={s}
+                        className="flex justify-center items-center gap-2"
+                     >
+                        <button
+                           disabled={s === "Sold"}
+                           className={`w-8 h-8 rounded-md ${s === "Selected" && "bg-green-500 text-green-950"} ${s === "Sold" ? "bg-zinc-700 border-none text-zinc-500" : "border-1 border-zinc-600"}`}
+                        ></button>
+                        <span className="text-sm text-secondary-foreground/60">
+                           {s}
+                        </span>
+                     </li>
+                  ))}
+               </ul>
+               <Button variant="solid" color="primary" size="md" radius="sm">
+                  PAY
+               </Button>
             </div>
          </div>
       </AppLayout>

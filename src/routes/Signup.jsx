@@ -3,7 +3,6 @@ import AppLayout from "../components/AppLayout";
 import { Input } from "@nextui-org/input";
 import { Button } from "@nextui-org/button";
 import { Link } from "react-router-dom";
-import ls from "../assets/ls.svg";
 
 const inputs = [
    { type: "email", label: "Enter your email" },
@@ -14,13 +13,10 @@ const inputs = [
 const SignUp = () => {
    return (
       <AppLayout>
-         <div className="flex w-full h-screen justify-center items-center">
-            <div className="fixed top-0 left-0 h-screen w-screen">
-               <img src={ls} className="w-full h-full" />
-            </div>
+         <div className="flex w-full h-screen justify-center items-center overflow-hidden">
             <Card
                isBlurred
-               className="bg-transparent shadow-lg shadow-[#300000] h-fit px-5 py-2"
+               className="bg-transparent h-fit px-5 py-2"
                radius="sm"
             >
                <CardHeader>

@@ -14,6 +14,7 @@ const LandingPage = () => {
             <div className="fixed w-screen h-screen top-0 left-0">
                <img src={lines} />
             </div>
+
             <div className="w-full flex justify-between z-10">
                <div className="flex items-center gap-1">
                   <Link to={"/"} unstable_viewTransition>
