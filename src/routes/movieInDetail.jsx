@@ -7,6 +7,7 @@ import CouraselBody from "../components/scrollCourasel";
 import MovieCard from "../components/movieCard";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { ScrollShadow } from "@nextui-org/scroll-shadow";
 
 const MovieInDetail = () => {
    const { id, name } = useParams();
@@ -106,12 +107,12 @@ const MovieInDetail = () => {
                   {Array.from({ length: 5 }).map((_, i) => (
                      <div
                         key={i}
-                        className="flex-shrink-0 w-28 h-28 flex flex-col items-center justify-center rounded-full snap-start"
+                        className="flex-shrink-0 w-fit h-fit py-2 px-3 flex flex-col items-center justify-center rounded-full snap-start"
                      >
                         <Image
                            isZoomed
                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQzqgIP-l8BphdUIPb4YQMF9PxO4FkrA94Xw&s"
-                           className="rounded-full w-20 h-20"
+                           className="rounded-full w-14 h-14"
                         />
                         <h4 className="text-xs font-medium">Name</h4>
                      </div>
@@ -128,12 +129,12 @@ const MovieInDetail = () => {
                   {Array.from({ length: 40 }).map((_, i) => (
                      <div
                         key={i}
-                        className="flex-shrink-0 w-28 h-28 flex flex-col items-center justify-center rounded-full overflow-hidden snap-start"
+                        className="flex-shrink-0 w-fit h-fit py-2 px-3 flex flex-col items-center justify-center rounded-full snap-start"
                      >
                         <Image
                            isZoomed
                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQzqgIP-l8BphdUIPb4YQMF9PxO4FkrA94Xw&s"
-                           className="rounded-full w-20 h-20"
+                           className="rounded-full w-14 h-14"
                         />
                         <h4 className="text-xs">Name</h4>
                      </div>
@@ -143,10 +144,10 @@ const MovieInDetail = () => {
          </div>
 
          {/* {you might also like} */}
-         <div className="sm:container mx-auto px-4 font-semibold overflow-hidden mt-9">
+         <div className="sm:container mx-auto px-4 font-semibold mt-9">
             <h3 className="text-xl mb-4">You might also like</h3>
             <div className="w-full grid grid-cols-[auto_1fr_auto] items-center gap-3">
-               <CouraselBody>
+               <CouraselBody amount={800}>
                   {Array.from({ length: 10 }).map((_, i) => (
                      <MovieCard
                         movie={{

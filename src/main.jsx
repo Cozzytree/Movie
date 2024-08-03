@@ -14,29 +14,29 @@ import { Navigate } from "react-router-dom";
 import MovieInDetail from "./routes/movieInDetail";
 
 const router = createBrowserRouter([
-   { element: <LandingPage />, path: "/", children: [] },
-   { element: <SignIn />, path: "/sign_in", children: [] },
-   { element: <SignUp />, path: "/sign_up", children: [] },
-   { element: <SeatSelection />, path: "/seats", children: [] },
-   {
-      element: <ExplorePage />,
-      path: "/explore",
-      children: [
-         { element: <Navigate to="/explore/movies" />, index: true },
-         {
-            element: <MoviePage />,
-            path: "movies",
-            children: [],
-         }, // Note: Use relative path,
-         { element: <MovieInDetail />, path: "movies/:name/:id" },
-      ],
-   },
+  { element: <LandingPage />, path: "/", children: [] },
+  { element: <SignIn />, path: "/sign_in", children: [] },
+  { element: <SignUp />, path: "/sign_up", children: [] },
+  { element: <SeatSelection />, path: "/seats", children: [] },
+  {
+    element: <ExplorePage />,
+    path: "/explore",
+    children: [
+      { element: <Navigate to="/explore/movies" />, index: true },
+      {
+        element: <MoviePage />,
+        path: "movies",
+        children: [],
+      }, // Note: Use relative path,
+      { element: <MovieInDetail />, path: "movies/:name/:id" },
+    ],
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-   <React.StrictMode>
-      <NextUIProvider>
-         <RouterProvider router={router} />
-      </NextUIProvider>
-   </React.StrictMode>,
+  <React.StrictMode>
+    <NextUIProvider>
+      <RouterProvider router={router} />
+    </NextUIProvider>
+  </React.StrictMode>,
 );

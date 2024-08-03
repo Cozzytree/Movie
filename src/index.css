@@ -6,27 +6,12 @@ html {
    font-family: "poppins";
 }
 
-.container {
-   perspective: 1000px; /* Creates the 3D space for the child element */
+.screen {
+   border: 5px #50205090 double;
+   background: #10409050;
+   box-shadow: 0px -40px 50px #00009030;
 }
 
-.rotated-div {
-   width: 300px;
-   height: 300px;
-   background-color: #3498db; /* Blue background */
-   color: white;
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   font-size: 20px;
-   font-family: Arial, sans-serif;
-   text-align: center;
-
-   /* Add 3D effect */
-   transform: rotateX(60deg) translateZ(100px);
-   transform-style: preserve-3d; /* Ensure child elements are transformed in 3D space */
-   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Optional shadow for better depth effect */
-}
 @layer base {
    /* :root {
       --background: 213 61% 100%;

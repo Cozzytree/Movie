@@ -11,8 +11,8 @@ const LandingPage = () => {
    return (
       <AppLayout>
          <div className="w-full flex flex-col py-2 px-10 gap-4 mb-20">
-            <div className="fixed w-screen h-screen top-0 left-0">
-               <img src={lines} />
+            <div className="fixed w-screen h-[100dvh] top-0 left-0">
+               <img src={lines} className="h-full w-full object-cover" />
             </div>
 
             <div className="w-full flex justify-between z-10">

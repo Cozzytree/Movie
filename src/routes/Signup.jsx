@@ -1,19 +1,34 @@
 import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/card";
+import lines from "../assets/lines.svg";
+import Brand from "../components/brand";
 import AppLayout from "../components/AppLayout";
 import { Input } from "@nextui-org/input";
 import { Button } from "@nextui-org/button";
 import { Link } from "react-router-dom";
+import { Image } from "@nextui-org/image";
 
 const inputs = [
    { type: "email", label: "Enter your email" },
    { type: "password", label: "Enter password" },
-   { type: "password", label: "COnfirm password" },
+   { type: "password", label: "Confirm password" },
 ];
 
 const SignUp = () => {
    return (
       <AppLayout>
-         <div className="flex w-full h-screen justify-center items-center overflow-hidden">
+         <div className="flex w-full h-[100dvh] justify-center items-center overflow-hidden">
+            <div className="border-opacity-10 fixed top-0 left-0 h-[100dvh] w-screen">
+               <Image
+                  src={lines}
+                  isBlurred
+                  className="h-[100dvh] w-screen object-cover"
+               />
+            </div>
+
+            <div className="fixed top-0 left-0 p-2">
+               <Brand />
+            </div>
+
             <Card
                isBlurred
                className="bg-transparent h-fit px-5 py-2"

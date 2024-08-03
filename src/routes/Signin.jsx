@@ -5,17 +5,29 @@ import { Checkbox } from "@nextui-org/checkbox";
 import { useState } from "react";
 import { Button } from "@nextui-org/button";
 import { Link } from "react-router-dom";
-import ls from "../assets/ls.svg";
+import lines from "../assets/lines.svg";
+import { Image } from "@nextui-org/image";
+import Brand from "../components/brand";
 
 const SignIn = () => {
    const [email, setEmail] = useState("");
    const [isShow, setShow] = useState(false);
    return (
       <AppLayout>
-         <div className="w-full mx-auto min-h-screen flex justify-center items-center px-5 overflow-hidden">
+         <div className="relative w-full mx-auto h-[100dvh] flex justify-center items-center px-5 overflow-hidden">
+            <div className="fixed top-0 left-0 p-2">
+               <Brand />
+            </div>
+            <div className="border-opacity-10 fixed top-0 left-0 h-[100dvh] w-screen">
+               <Image
+                  src={lines}
+                  isBlurred
+                  className="h-[100dvh] w-screen object-cover"
+               />
+            </div>
             <Card
                isBlurred
-               className="bg-transparent h-fit px-5 py-2"
+               className="bg-transparent backdrop-blur-sm h-fit px-5 py-2"
                radius="sm"
             >
                <CardHeader className="flex flex-col items-start">

@@ -1,10 +1,12 @@
+import { ScrollShadow } from "@nextui-org/scroll-shadow";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useRef } from "react";
 import { CgArrowRight } from "react-icons/cg";
+import { MdArrowLeft, MdArrowRight } from "react-icons/md";
 import { PiArrowLeftFill } from "react-icons/pi";
 
-const CouraselBody = ({ children }) => {
+const CouraselBody = ({ children, amount = 400 }) => {
    const scrollRef = useRef();
    const [start, setIsAtStart] = useState(false);
    const [end, setIsAtEnd] = useState(false);
@@ -30,13 +32,13 @@ const CouraselBody = ({ children }) => {
       if (direction === "left")
          s.scrollBy({
             top: 0,
-            left: -400,
+            left: -amount,
             behavior: "smooth",
          });
       else
          s.scrollBy({
             top: 0,
-            left: 400,
+            left: amount,
             behavior: "smooth",
          });
       checkPosition(s);
@@ -44,25 +46,29 @@ const CouraselBody = ({ children }) => {
 
    return (
       <>
-         <div className="flex items-center justify-center">
+         <div className="hidden sm:flex items-center justify-center bg-gradient-to-r from-background/40 to-background/50">
             {start && (
-               <PiArrowLeftFill
+               <MdArrowLeft
+                  className="w-3 scale-[2]"
                   cursor={"pointer"}
                   onClick={() => handleScroll("left")}
                />
             )}
          </div>
-         <div
+         <ScrollShadow
             ref={scrollRef}
-            id="carousel-body"
-            className="w-full flex gap-3 overflow-hidden snap-x snap-mandatory"
+            className="max-w-[50em] flex gap-2 items-center"
+            hideScrollBar
+            offset={100}
+            orientation="horizontal"
          >
             {children}
-         </div>
+         </ScrollShadow>
 
-         <div className="flex items-center justify-center">
+         <div className="hidden sm:flex items-center justify-center">
             {end && (
-               <CgArrowRight
+               <MdArrowRight
+                  className="w-3 scale-[2]"
                   cursor={"pointer"}
                   onClick={() => handleScroll("right")}
                />

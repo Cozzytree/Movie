@@ -16,6 +16,17 @@ import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
+import {
+   Sheet,
+   SheetContent,
+   SheetDescription,
+   SheetTitle,
+   SheetTrigger,
+} from "../components/sheet";
+import { FaHistory } from "react-icons/fa";
+import { GrOrderedList } from "react-icons/gr";
+import { BsList } from "react-icons/bs";
+import { Button } from "@nextui-org/button";
 
 const routes = [
    {
@@ -26,6 +37,11 @@ const routes = [
       r: "#",
       label: "Shows",
    },
+];
+
+const userSettimgs = [
+   { label: "Purchase History", icon: <FaHistory /> },
+   { label: "Orders", icon: <BsList /> },
 ];
 
 const ExplorePage = () => {
@@ -70,7 +86,29 @@ const ExplorePage = () => {
                ))}
             </NavbarContent>
 
-            <NavbarContent justify="center">User</NavbarContent>
+            <Sheet>
+               <SheetTrigger>
+                  <NavbarContent justify="center">User</NavbarContent>
+               </SheetTrigger>
+               <SheetContent side="right">
+                  <SheetTitle className="mb-5">Username</SheetTitle>
+
+                  <ul>
+                     {userSettimgs.map((u) => (
+                        <li key={u.label} className="space-y-1">
+                           <Button
+                              className="border-0 w-full grid grid-cols-[1fr_auto]"
+                              variant="light"
+                              startContent={u.icon}
+                              color=""
+                           >
+                              {u.label}
+                           </Button>
+                        </li>
+                     ))}
+                  </ul>
+               </SheetContent>
+            </Sheet>
 
             <NavbarMenu className="z-50">
                {routes.map((r) => (
