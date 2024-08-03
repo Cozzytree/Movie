@@ -7,10 +7,11 @@ import {
    DropdownMenuTrigger,
 } from "@radix-ui/react-dropdown-menu";
 import { CiFilter } from "react-icons/ci";
+import { Toggle } from "./toggle";
 
 const filters = [
-   { f: "languages", values: ["Hindi", "English"] },
-   { f: "genre", values: ["Action", "Adventute"] },
+   { f: "languages", values: ["Hindi", "English", "Telegu", "Marathi"] },
+   { f: "genre", values: ["Action", "Adventure", "Horror", "Fantasy"] },
    { f: "type", values: ["full HD", "3k"] },
 ];
 
@@ -20,22 +21,29 @@ const MovieFilter = () => {
          <DropdownMenuTrigger className="flex items-center gap-1">
             <CiFilter />
             Filter
-            {/* <Button
-               type="button"
-               variant="ghost"
-               color="primary"
-               startContent={<CiFilter />}
-            >
-               Filter
-            </Button> */}
          </DropdownMenuTrigger>
-         <DropdownMenuContent className="z-50 bg-zinc-900 rounded-xl p-4 min-w-60">
+         <DropdownMenuContent className="z-50 bg-zinc-950 rounded-xl p-4 w-52 sm:min-w-96">
             <Accordion>
                {filters.map((f, i) => (
-                  <AccordionItem key={i} aria-label={f.f} title={f.f}>
-                     {f.values.map((v) => (
-                        <p key={v}>{v}</p>
-                     ))}
+                  <AccordionItem
+                     key={i}
+                     aria-label={f.f}
+                     title={f.f}
+                     className="text-xs"
+                  >
+                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-[1fr_1fr_1fr_1fr] gap-2">
+                        {f.values.map((v) => (
+                           <Toggle
+                              defaultPressed={true}
+                              variant={"outline"}
+                              key={v}
+                              className="h-fit text-xs rounded-xl"
+                              aria-label={v}
+                           >
+                              <button className="p-1">{v}</button>
+                           </Toggle>
+                        ))}
+                     </div>
                   </AccordionItem>
                ))}
             </Accordion>

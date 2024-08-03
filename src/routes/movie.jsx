@@ -43,15 +43,15 @@ const recommended = [
 
 const MoviePage = () => {
    return (
-      <div className="w-full space-y-4 mb-12">
+      <div className="w-full space-y-4 mb-12 px-4">
          <div className="flex w-full justify-between">
             <h1 className="text-start text-xl">Recommended Movies</h1>
 
             <MovieFilter />
          </div>
-         <div className="grid grid-cols-4 gap-2">
+         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-2">
             {recommended.map((movie) => (
-               <Card className="min-h-80 bg-zinc-900 hover:translate-y-5 hover:z-50 hover:scale-[1.05]">
+               <Card className="min-h-80 bg-zinc-900 hover:translate-y-2 hover:z-50 hover:scale-[1.03]">
                   <CardBody className="relative">
                      <Image width={100} alt={movie.title} src={movie.poster} />
                      <div className="absolute bottom-0 flex justify-start items-center left-0 bg-secondary-900 w-full p-2">
