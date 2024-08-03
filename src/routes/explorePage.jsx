@@ -102,9 +102,11 @@ const ExplorePage = () => {
             </Navbar>
          </div>
 
-         <main className="w-full flex flex-col items-start sm:container mx-auto mt-4">
+         <main className="w-full flex flex-col mx-auto mt-4">
             <Outlet />
          </main>
+
+         <footer className="mt-9 mb-10">I am Footer</footer>
       </AppLayout>
    );
 };

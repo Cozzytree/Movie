@@ -1,5 +1,5 @@
 import { Accordion, AccordionItem } from "@nextui-org/accordion";
-import { Button } from "@nextui-org/button";
+import { useSearchParams } from "react-router-dom";
 import {
    DropdownMenu,
    DropdownMenuContent,
@@ -8,6 +8,7 @@ import {
 } from "@radix-ui/react-dropdown-menu";
 import { CiFilter } from "react-icons/ci";
 import { Toggle } from "./toggle";
+import { useState } from "react";
 
 const filters = [
    { f: "languages", values: ["Hindi", "English", "Telegu", "Marathi"] },
@@ -16,6 +17,9 @@ const filters = [
 ];
 
 const MovieFilter = () => {
+   const [searchParams, setSearchParams] = useSearchParams();
+   const [lang, setLang] = useState([]);
+
    return (
       <DropdownMenu>
          <DropdownMenuTrigger className="flex items-center gap-1">
@@ -37,7 +41,7 @@ const MovieFilter = () => {
                               defaultPressed={true}
                               variant={"outline"}
                               key={v}
-                              className="h-fit text-xs rounded-xl"
+                              className="text-xs hover:bg-transparent rounded-xl"
                               aria-label={v}
                            >
                               <button className="p-1">{v}</button>

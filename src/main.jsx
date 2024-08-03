@@ -11,6 +11,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { NextUIProvider } from "@nextui-org/react";
 import SignIn from "./routes/Signin";
 import { Navigate } from "react-router-dom";
+import MovieInDetail from "./routes/movieInDetail";
 
 const router = createBrowserRouter([
    { element: <LandingPage />, path: "/", children: [] },
@@ -22,7 +23,12 @@ const router = createBrowserRouter([
       path: "/explore",
       children: [
          { element: <Navigate to="/explore/movies" />, index: true },
-         { element: <MoviePage />, path: "movies" }, // Note: Use relative path,
+         {
+            element: <MoviePage />,
+            path: "movies",
+            children: [],
+         }, // Note: Use relative path,
+         { element: <MovieInDetail />, path: "movies/:name/:id" },
       ],
    },
 ]);

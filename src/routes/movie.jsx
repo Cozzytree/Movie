@@ -2,9 +2,12 @@ import { Card, CardBody, CardFooter } from "@nextui-org/card";
 import { Image } from "@nextui-org/image";
 import { BiStar } from "react-icons/bi";
 import MovieFilter from "../components/MovieFilter";
+import { useNavigate } from "react-router-dom";
+import MovieCard from "../components/movieCard";
 
 const recommended = [
    {
+      id: 1,
       title: "DeadPool",
       stars: 6.9,
       votes: 1500,
@@ -12,6 +15,7 @@ const recommended = [
       poster: "https://example.com/posters/deadpool.jpg",
    },
    {
+      id: 2,
       title: "Inception",
       stars: 8.8,
       votes: 2500,
@@ -19,6 +23,7 @@ const recommended = [
       poster: "https://example.com/posters/inception.jpg",
    },
    {
+      id: 3,
       title: "The Matrix",
       stars: 8.7,
       votes: 3000,
@@ -26,6 +31,7 @@ const recommended = [
       poster: "https://example.com/posters/the_matrix.jpg",
    },
    {
+      id: 4,
       title: "The Grand Budapest Hotel",
       stars: 8.1,
       votes: 1800,
@@ -33,6 +39,7 @@ const recommended = [
       poster: "https://example.com/posters/grand_budapest_hotel.jpg",
    },
    {
+      id: 5,
       title: "Parasite",
       stars: 8.6,
       votes: 2200,
@@ -42,8 +49,14 @@ const recommended = [
 ];
 
 const MoviePage = () => {
+   const navigate = useNavigate();
+
+   const handleNav = (route) => {
+      navigate(route);
+   };
+
    return (
-      <div className="w-full space-y-4 mb-12 px-4">
+      <div className="w-full sm:container mx-auto space-y-4 mb-12 px-4">
          <div className="flex w-full justify-between">
             <h1 className="text-start text-xl">Recommended Movies</h1>
 
@@ -51,27 +64,12 @@ const MoviePage = () => {
          </div>
          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-2">
             {recommended.map((movie) => (
-               <Card className="min-h-80 bg-zinc-900 hover:translate-y-2 hover:z-50 hover:scale-[1.03]">
-                  <CardBody className="relative">
-                     <Image width={100} alt={movie.title} src={movie.poster} />
-                     <div className="absolute bottom-0 flex justify-start items-center left-0 bg-secondary-900 w-full p-2">
-                        <p className="flex items-center justify-center">
-                           <BiStar /> {movie.stars}/10
-                        </p>
-                        <p>
-                           {new Intl.NumberFormat("en-Us", {
-                              localeMatcher: "best fit",
-                              compactDisplay: "short",
-                           }).format(movie.votes)}
-                        </p>
-                     </div>
-                  </CardBody>
-
-                  <CardFooter className="flex flex-col gap-2 items-start">
-                     <h4>{movie.title}</h4>
-                     <p>{movie.genre}</p>
-                  </CardFooter>
-               </Card>
+               <MovieCard
+                  clickHander={() =>
+                     handleNav(`/explore/movies/${movie.title}/${movie.id}`)
+                  }
+                  movie={movie}
+               />
             ))}
          </div>
       </div>
