@@ -2,9 +2,7 @@ import { ScrollShadow } from "@nextui-org/scroll-shadow";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useRef } from "react";
-import { CgArrowRight } from "react-icons/cg";
 import { MdArrowLeft, MdArrowRight } from "react-icons/md";
-import { PiArrowLeftFill } from "react-icons/pi";
 
 const CouraselBody = ({ children, amount = 400 }) => {
    const scrollRef = useRef();
@@ -57,7 +55,7 @@ const CouraselBody = ({ children, amount = 400 }) => {
          </div>
          <ScrollShadow
             ref={scrollRef}
-            className="max-w-[50em] flex gap-2 items-center"
+            className="w-full flex gap-2 items-center"
             hideScrollBar
             offset={100}
             orientation="horizontal"

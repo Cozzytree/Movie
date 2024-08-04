@@ -1,7 +1,7 @@
 import { Input } from "@nextui-org/input";
 import AppLayout from "../components/AppLayout";
+import screen from "../assets/screen.svg";
 import { useState } from "react";
-import { FaRegSquare } from "react-icons/fa";
 import { Button } from "@nextui-org/button";
 import {
    Modal,
@@ -11,6 +11,7 @@ import {
    ModalHeader,
 } from "@nextui-org/modal";
 import { useDisclosure } from "@nextui-org/modal";
+import { Image } from "@nextui-org/image";
 
 const days = {
    day: new Date("2024-08-01").getTime(), // August 1, 2024
@@ -155,7 +156,8 @@ const SeatSelection = () => {
 
             <div className="w-full flex flex-col gap-1 items-center py-4">
                <p className="text-xs"> ALl eyes here.</p>
-               <div className="w-1/2 rounded-lg h-5 screen relative"></div>
+               <Image width={200} height={50} src={screen}></Image>
+               {/* <div className="w-1/2 rounded-lg h-5 screen relative"></div> */}
             </div>
 
             <div className="flex w-full flex-col gap-5">

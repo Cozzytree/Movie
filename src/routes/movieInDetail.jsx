@@ -8,6 +8,7 @@ import MovieCard from "../components/movieCard";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { ScrollShadow } from "@nextui-org/scroll-shadow";
+import { Link } from "react-router-dom";
 
 const MovieInDetail = () => {
    const { id, name } = useParams();
@@ -75,7 +76,9 @@ const MovieInDetail = () => {
                   </p>
 
                   <Button variant="shadow" color="secondary" size="xs">
-                     Book Tickets
+                     <Link to={`/buy_tickets/${name}/${id}/${Date.now()}`}>
+                        Book Tickets
+                     </Link>
                   </Button>
                </div>
 
