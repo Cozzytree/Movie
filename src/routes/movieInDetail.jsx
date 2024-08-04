@@ -76,7 +76,9 @@ const MovieInDetail = () => {
                   </p>
 
                   <Button variant="shadow" color="secondary" size="xs">
-                     <Link to={`/buy_tickets/${name}/${id}/${Date.now()}`}>
+                     <Link
+                        to={`/buy_tickets/movie/${name}/${id}/${Date.now()}`}
+                     >
                         Book Tickets
                      </Link>
                   </Button>
