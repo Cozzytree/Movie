@@ -1,5 +1,6 @@
 import { Card } from "@nextui-org/card";
 import { Chip } from "@nextui-org/chip";
+import { useDisclosure } from "@nextui-org/modal";
 import { Link } from "react-router-dom";
 
 const cinemas = [
@@ -152,37 +153,47 @@ const cinemas = [
    },
 ];
 
-const MovieInHalls = () => {
+const MovieBooking = () => {
+   const { onOpen, isOpen } = useDisclosure();
+
    return (
-      <div className="w-full flex flex-col items-start justify-center gap-3 p-2">
+      <div className="w-full flex flex-col items-start justify-center gap-3">
          {cinemas.map((c, i) => (
             <Card
                key={i}
                className="p-2 bg-background/40 w-full border-1"
                radius="sm"
             >
-               <div className="flex w-full justify-between">
-                  <div className="flex flex-col gap-1 items-end">
-                     <Link to={`/buy_tickets/cenima/${c.name}/id/details`}>
-                        <h3 className="text-sm max-w-[20ch]">
-                           {c.name}, {c.location}
-                        </h3>
-                     </Link>
+               <div className="flex w-full justify-between flex-col gap-1 sm:flex-row">
+                  <div className="flex flex-col gap-1">
+                     <h3 className="text-sm max-w-[20ch]">
+                        {c.name}, {c.location}
+                     </h3>
+
                      <Chip className="bg-transparent text-xs text-foreground-300">
                         {c.ticket_type}
                      </Chip>
                   </div>
 
-                  <div className="w-full flex gap-2 justify-end items-center flex-wrap">
+                  <div className="w-full flex gap-2 items-center flex-wrap">
                      {c.showtimes.map((s) => (
-                        <Chip
-                           variant="bordered"
-                           color="primary"
-                           size="sm"
-                           className="cursor-pointer text-xs"
+                        <Link
+                           key={s}
+                           to={`/seat_layout/location/movieId/hallId/details`}
                         >
-                           {s}
-                        </Chip>
+                           <Chip
+                              variant="bordered"
+                              color="primary"
+                              radius="sm"
+                              size="sm"
+                              className="cursor-pointer text-xs border-1"
+                              onClick={() => {
+                                 setSeatLayout(true);
+                              }}
+                           >
+                              {s}
+                           </Chip>
+                        </Link>
                      ))}
                   </div>
                </div>
@@ -192,4 +203,4 @@ const MovieInHalls = () => {
    );
 };
 
-export default MovieInHalls;
+export default MovieBooking;

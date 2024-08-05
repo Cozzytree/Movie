@@ -6,6 +6,10 @@ html {
    font-family: "poppins";
 }
 
+.custom-grid {
+   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
 .screen {
    border: 5px #50205090 double;
    background: #10409050;

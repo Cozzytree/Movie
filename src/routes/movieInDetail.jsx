@@ -29,7 +29,7 @@ const MovieInDetail = () => {
                />
             </div>
 
-            <div className="container mx-auto px-5 flex flex-col md:grid md:grid-cols-[auto_1fr_auto] gap-3">
+            <div className="px-1 sm:container mx-auto flex flex-col md:grid md:grid-cols-[auto_1fr_auto] gap-3">
                <div className="flex w-full justify-between relative">
                   <Image
                      isBlurred
@@ -73,7 +73,7 @@ const MovieInDetail = () => {
 
                   <Button variant="shadow" color="secondary" size="xs">
                      <Link
-                        to={`/buy_tickets/movie/${name}/${id}/${Date.now()}`}
+                        to={`/buy_tickets/${name}-location/${id}/${Date.now()}`}
                      >
                         Book Tickets
                      </Link>
@@ -88,7 +88,7 @@ const MovieInDetail = () => {
             </div>
          </div>
 
-         <div className="sm:container mx-auto px-4 mb-7">
+         <div className="sm:container mx-auto px-1 mb-7">
             <h3 className="text-xl font-semibold py-4">About the movie</h3>
 
             <p className="text-xs sm:text-sm text-wrap">
@@ -101,7 +101,7 @@ const MovieInDetail = () => {
          </div>
 
          {/* {cast} */}
-         <div className="sm:container mx-auto px-4 font-semibold overflow-hidden">
+         <div className="sm:container mx-auto px-1 font-semibold overflow-hidden">
             <h3 className="text-xl mb-4">Cast</h3>
             <div className="w-full grid grid-cols-[auto_1fr_auto] items-center gap-1">
                <CouraselBody>
@@ -123,7 +123,7 @@ const MovieInDetail = () => {
          </div>
 
          {/* {crew} */}
-         <div className="sm:container mx-auto px-4 font-semibold overflow-hidden mt-9">
+         <div className="sm:container mx-auto px-1 font-semibold overflow-hidden mt-9">
             <h3 className="text-xl mb-4">Crew</h3>
             <div className="w-full grid grid-cols-[auto_1fr_auto] items-center gap-3">
                <CouraselBody>
@@ -145,7 +145,7 @@ const MovieInDetail = () => {
          </div>
 
          {/* {you might also like} */}
-         <div className="sm:container mx-auto px-4 font-semibold mt-9">
+         <div className="sm:container mx-auto px-1 font-semibold mt-9">
             <h3 className="text-xl mb-4">You might also like</h3>
             <div className="w-full grid grid-cols-[auto_1fr_auto] items-center gap-3">
                <CouraselBody amount={800}>

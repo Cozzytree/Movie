@@ -55,9 +55,9 @@ const CouraselBody = ({ children, amount = 400 }) => {
          </div>
          <ScrollShadow
             ref={scrollRef}
-            className="w-full flex gap-2 items-center"
+            className="w-full flex gap-1 items-center"
             hideScrollBar
-            offset={100}
+            // offset={10}
             orientation="horizontal"
          >
             {children}

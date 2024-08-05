@@ -32,16 +32,11 @@ const MovieFilter = () => {
             <CiFilter />
             Filter
          </DropdownMenuTrigger>
-         <DropdownMenuContent className="z-50 bg-zinc-950 rounded-xl p-4 w-[16em]">
+         <DropdownMenuContent className="z-50 bg-zinc-950 rounded-xl p-4 w-[15em] sm:w-[18em]">
             <Accordion>
                {filters.map((f, i) => (
-                  <AccordionItem
-                     key={i}
-                     aria-label={f.f}
-                     title={f.f}
-                     className="text-xs"
-                  >
-                     <div className="w-full flex flex-wrap items-center gap-2">
+                  <AccordionItem key={i} aria-label={f.f} title={f.f}>
+                     <div className="w-full flex flex-wrap items-center gap-1">
                         {f.values.map((v) => (
                            <Chip
                               onClick={() => {

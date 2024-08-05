@@ -1,21 +1,30 @@
-import { Card, CardBody, CardFooter } from "@nextui-org/card";
 import { Image } from "@nextui-org/image";
 import { BiStar } from "react-icons/bi";
 import { BsImage } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 const MovieCard = ({ clickHander, movie }) => {
    return (
-      <Card className="min-h-80 min-w-48 bg-zinc-900 cursor-pointer">
-         <CardBody className="relative" onClick={clickHander}>
-            {movie.poster ? (
-               <Image width={100} alt={movie.title} src={movie.poster} />
+      <Link
+         className="bg-background"
+         to={`/buy_tickets/${movie.title}-location/${movie.id}/${Date.now()}`}
+      >
+         <div className="min-h-64 min-w-36 cursor-pointer border-1 p-2 rounded-md">
+            {movie.poster.length >= 0 ? (
+               <Image
+                  width={100}
+                  height={300}
+                  className="h-[80%]"
+                  alt={movie.title}
+                  src={movie.poster}
+               />
             ) : (
-               <div className="">
+               <div className="h-[80%]">
                   <BsImage />
                </div>
             )}
 
-            <div className="absolute bottom-0 flex flex-col justify-start items-start left-0 bg-secondary-900 w-full p-2">
+            <div className="w-full flex items-center justify-between">
                <p className="flex text-xs gap-3 items-center justify-center">
                   <BiStar /> {movie.stars} / 10
                </p>
@@ -27,15 +36,14 @@ const MovieCard = ({ clickHander, movie }) => {
                   votes
                </p>
             </div>
-         </CardBody>
 
-         <CardFooter className="flex flex-col gap-2 items-start">
-            <h4 className="text-lg">{movie.title}</h4>
-            <p className="text-xs font-normal text-foreground-200">
-               {movie.genre}
-            </p>
-         </CardFooter>
-      </Card>
+            <div className="w-full">
+               <h4 className="font-medium text-start text-wrap">
+                  {movie.title}
+               </h4>
+            </div>
+         </div>
+      </Link>
    );
 };
 

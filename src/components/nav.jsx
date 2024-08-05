@@ -46,13 +46,13 @@ const Nav = () => {
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
          />
 
-         <NavbarContent className="pr-3 hidden sm:flex" justify="center">
+         <NavbarContent className="hidden sm:flex" justify="center">
             <NavbarBrand>
                <p className="font-bold text-inherit">BRAND</p>
             </NavbarBrand>
          </NavbarContent>
 
-         <NavbarContent className="pr-3 flex sm:hidden" justify="start">
+         <NavbarContent className=" flex sm:hidden" justify="start">
             <NavbarBrand>
                <p className="font-bold text-inherit">BRAND</p>
             </NavbarBrand>

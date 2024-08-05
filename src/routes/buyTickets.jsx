@@ -11,6 +11,7 @@ import {
 import { useState } from "react";
 import { CgArrowRight, CgClose } from "react-icons/cg";
 import { Outlet, useNavigate, useParams } from "react-router-dom";
+import MovieInHalls from "../components/MovieInHalls";
 import AppLayout from "../components/AppLayout";
 import Nav from "../components/nav";
 import CouraselBody from "../components/scrollCourasel";
@@ -193,11 +194,7 @@ const BuyTickets = () => {
    const params = useParams();
    const naviagate = useNavigate();
    const [fil, setFil] = useState([]);
-   // const [searchParams, setSearchParams] = useSearchParams();
-   // useEffect(() => {
-   //    window.scrollTo(0, 0);
-   // }, [params]);
-   //
+
    const handleFilter = (value) => {
       const index = fil.findIndex((item) => item.label === value.label);
 
@@ -212,7 +209,7 @@ const BuyTickets = () => {
    };
 
    const changeTimings = (t) => {
-      naviagate(`/buy_tickets/movie/name-location/id/${t}`);
+      naviagate(`/buy_tickets/name-location/id/${t}`);
    };
 
    return (
@@ -220,10 +217,11 @@ const BuyTickets = () => {
          <div className="w-full min-h-[100dvh] flex flex-col gap-2 mb-32">
             <Nav />
 
-            <div className="sm:container mx-auto px-3">
+            <div className="sm:container mx-auto">
                <h1 className="text-xl sm:text-2xl font-semibold mb-2">
                   DeadPool
                </h1>
+
                <div>
                   <Chip className="bg-transparent text-accent border-1 text-xs">
                      Action
@@ -312,43 +310,9 @@ const BuyTickets = () => {
                </div>
 
                <main>
-                  <Outlet />
+                  {/* <Outlet /> */}
+                  <MovieInHalls />
                </main>
-               {/* <div className="w-full flex flex-col items-start justify-center gap-3 p-2">
-                  {cinemas.map((c, i) => (
-                     <Card
-                        key={i}
-                        className="p-2 bg-background/40 w-full border-1"
-                        radius="sm"
-                     >
-                        <div className="flex w-full justify-between">
-                           <div className="flex flex-col gap-1 items-end">
-                              <Link to={`/buy_tickets/${c.name}/cinemaId`}>
-                                 <h3 className="text-sm max-w-[20ch]">
-                                    {c.name}, {c.location}
-                                 </h3>
-                              </Link>
-                              <Chip className="bg-transparent text-xs text-foreground-300">
-                                 {c.ticket_type}
-                              </Chip>
-                           </div>
-
-                           <div className="w-full flex gap-2 justify-end items-center flex-wrap">
-                              {c.showtimes.map((s) => (
-                                 <Chip
-                                    variant="bordered"
-                                    color="primary"
-                                    size="sm"
-                                    className="cursor-pointer text-xs"
-                                 >
-                                    {s}
-                                 </Chip>
-                              ))}
-                           </div>
-                        </div>
-                     </Card>
-                  ))}
-               </div> */}
             </div>
          </div>
       </AppLayout>

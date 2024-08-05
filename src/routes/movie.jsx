@@ -56,13 +56,15 @@ const MoviePage = () => {
    };
 
    return (
-      <div className="w-full sm:container mx-auto space-y-4 mb-12 px-4">
-         <div className="flex w-full justify-between">
-            <h1 className="text-start text-xl">Recommended Movies</h1>
+      <div className="w-full sm:container mx-auto space-y-4 mb-12">
+         <div className="flex w-full justify-between px-2">
+            <h1 className="text-start text-sm sm:text-xl">
+               Recommended Movies
+            </h1>
 
             <MovieFilter />
          </div>
-         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-2">
+         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 px-3">
             {recommended.map((movie) => (
                <MovieCard
                   clickHander={() =>

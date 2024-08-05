@@ -14,6 +14,7 @@ import { useState } from "react";
 import screen from "../assets/screen.svg";
 import AppLayout from "../components/AppLayout";
 import Brand from "../components/brand";
+import { ScrollShadow } from "@nextui-org/scroll-shadow";
 
 const days = {
    day: new Date("2024-08-01").getTime(), // August 1, 2024
@@ -25,6 +26,8 @@ const seatDetails = ["Sold", "Available", "Selected"];
 const cinemaSeats = [
    {
       group: "A",
+      price: 450,
+      maxInRow: 2,
       s: [
          { row: 1, seat: 1, isAvailable: true, id: 1 },
          { row: 1, seat: 2, isAvailable: false, id: 2 },
@@ -34,6 +37,8 @@ const cinemaSeats = [
    },
    {
       group: "B",
+      price: 310,
+      maxInRow: 4,
       s: [
          { row: 2, seat: 1, isAvailable: true, id: 5 },
          { row: 2, seat: 2, isAvailable: true, id: 6 },
@@ -43,6 +48,8 @@ const cinemaSeats = [
    },
    {
       group: "C",
+      price: 250,
+      maxInRow: 2,
       s: [
          { row: 3, seat: 1, isAvailable: false, id: 9 },
          { row: 3, seat: 2, isAvailable: true, id: 10 },
@@ -52,6 +59,8 @@ const cinemaSeats = [
    },
    {
       group: "D",
+      price: 200,
+      maxInRow: 2,
       s: [
          { row: 4, seat: 1, isAvailable: true, id: 13 },
          { row: 4, seat: 2, isAvailable: true, id: 14 },
@@ -62,6 +71,8 @@ const cinemaSeats = [
    },
    {
       group: "E",
+      price: 120,
+      maxInRow: 4,
       s: [
          { row: 5, seat: 1, isAvailable: false, id: 17 },
          { row: 5, seat: 2, isAvailable: true, id: 18 },
@@ -70,6 +81,34 @@ const cinemaSeats = [
          { row: 5, seat: 5, isAvailable: false, id: 21 },
          { row: 5, seat: 6, isAvailable: false, id: 22 },
          { row: 5, seat: 7, isAvailable: false, id: 23 },
+      ],
+   },
+   {
+      group: "F",
+      price: 100,
+      maxInRow: 4,
+      s: [
+         { row: 6, seat: 1, isAvailable: false, id: 18 },
+         { row: 6, seat: 2, isAvailable: true, id: 19 },
+         { row: 6, seat: 3, isAvailable: true, id: 20 },
+         { row: 6, seat: 4, isAvailable: false, id: 21 },
+         { row: 6, seat: 5, isAvailable: false, id: 22 },
+         { row: 6, seat: 6, isAvailable: false, id: 23 },
+         { row: 6, seat: 7, isAvailable: false, id: 24 },
+      ],
+   },
+   {
+      group: "F",
+      price: 100,
+      maxInRow: 4,
+      s: [
+         { row: 7, seat: 1, isAvailable: false, id: 25 },
+         { row: 7, seat: 2, isAvailable: true, id: 26 },
+         { row: 7, seat: 3, isAvailable: true, id: 27 },
+         { row: 7, seat: 4, isAvailable: false, id: 28 },
+         { row: 7, seat: 5, isAvailable: false, id: 29 },
+         { row: 7, seat: 6, isAvailable: false, id: 30 },
+         { row: 7, seat: 7, isAvailable: false, id: 31 },
       ],
    },
 ];
@@ -103,17 +142,17 @@ const SeatSelection = () => {
                ? prevId.filter((id) => id !== seatId) // Remove the ID if it exists
                : [...prevId, seatId]; // Add the ID if it doesn't exist
 
+            if (newBookId.length > numOfSeats) {
+               newBookId.shift();
+            }
             return newBookId;
          });
       }
    };
 
    return (
-      <AppLayout>
-         <div className="w-full flex flex-col sm:container mx-auto h-screen items-center gap-5 py-6 px-4 relative">
-            <div className="fixed w-full top-0 left-0 flex justify-start">
-               <Brand />
-            </div>
+      <div className="h-[100dvh] w-full bg-background sm:container flex flex-col">
+         <div className="w-full">
             <div className="w-full flex justify-between mt-5">
                <div className="sm:flex items-center gap-2">
                   <h1 className="text-lg font-semibold">DeadPool</h1>
@@ -126,9 +165,8 @@ const SeatSelection = () => {
                   color="warning"
                   variant="solid"
                   size="sm"
-                  startContent={<Ticket />}
                >
-                  Tickets
+                  {numOfSeats} Tickets
                </Button>
                <Modal
                   onClose={ticketsClose}
@@ -185,102 +223,108 @@ const SeatSelection = () => {
                   ))}
                </select>
             </div>
+         </div>
 
-            <div className="w-full flex flex-col justify-center items-center gap-3">
-               {cinemaSeats.map((seat, index) => (
-                  <div
-                     key={index}
-                     className="gap-3 place-items-center grid grid-cols-[auto_1fr_auto]"
-                  >
-                     <p className="text-sm">{seat.group}</p>
-                     <ul className="flex gap-1">
+         <ScrollShadow
+            hideScrollBar
+            className="relative overflow-auto flex flex-col justify-center items-center"
+         >
+            {cinemaSeats.map((seat, index) => (
+               <div key={index} className="flex flex-col px-2">
+                  <span className="text-xs sm:text-sm font-normal">
+                     Rs. {seat.price}
+                  </span>
+                  <p className="text-sm">{seat.group}</p>
+                  <div className="gap-3 w-full flex justify-center">
+                     <ul
+                        className={`grid grid-cols-${seat.maxInRow} gap-1 mb-3`}
+                     >
                         {seat.s.map((s) => (
                            <li key={s.id} className="">
-                              <Chip
+                              <div className="w-6 h-6 sm:w-9 sm:h-9 border-1"></div>
+                              {/* <Chip
                                  color={`${s.isAvailable ? "primary" : "default"}`}
                                  variant={`${bookId.includes(s) ? "shadow" : "flat"}`}
                                  radius="sm"
-                                 size="md"
+                                 size="lg"
                                  isDisabled={!s.isAvailable}
                                  onClick={() => handleClick(s)}
                                  className="cursor-pointer border-1 border-lime-600"
                               >
                                  {s.seat}
-                              </Chip>
+                              </Chip> */}
                            </li>
                         ))}
                      </ul>
-                     <p className="text-sm">{seat.group}</p>
                   </div>
-               ))}
-            </div>
-
-            <div className="w-full flex flex-col gap-1 items-center py-4">
-               <p className="text-xs"> ALl eyes here.</p>
-               <Image width={200} height={50} src={screen}></Image>
-               {/* <div className="w-1/2 rounded-lg h-5 screen relative"></div> */}
-            </div>
-
-            <div className="flex w-full flex-col gap-5">
-               <ul className="flex justify-center w-full items-center gap-4 sm:flex-row flex-col">
-                  {seatDetails.map((s) => (
-                     <li key={s} className="flex gap-2 items-center">
-                        <Chip
-                           color={`${s === "Sold" ? "default" : "primary"}`}
-                           radius="sm"
-                           variant={`${s === "Available" || s === "Sold" ? "flat" : "shadow"}`}
-                           isDisabled={s === "Sold"}
-                        />
-                        <span className="text-xs">{s}</span>
-                     </li>
-                  ))}
-               </ul>
-
-               <div className="flex w-full justify-center">
-                  <Button
-                     onPress={onOpen}
-                     variant="solid"
-                     color="success"
-                     size="sm"
-                     radius="sm"
-                  >
-                     PAY
-                  </Button>
-
-                  <Modal
-                     isOpen={isOpen}
-                     onOpenChange={onOpenChange}
-                     className="bg-background"
-                  >
-                     <ModalContent>
-                        {(onClose) => (
-                           <>
-                              <ModalHeader className="flex flex-col gap-1">
-                                 Summary
-                              </ModalHeader>
-                              <ModalBody className="">
-                                 Ticket Summmary
-                              </ModalBody>
-                              <ModalFooter>
-                                 <Button
-                                    color="danger"
-                                    variant="light"
-                                    onPress={onClose}
-                                 >
-                                    Close
-                                 </Button>
-                                 <Button color="primary" onPress={onClose}>
-                                    Action
-                                 </Button>
-                              </ModalFooter>
-                           </>
-                        )}
-                     </ModalContent>
-                  </Modal>
+                  <div className="w-full border-1 mb-3 border-zinc-900/40"></div>
                </div>
+            ))}
+         </ScrollShadow>
+
+         {/* // <div className="w-full flex flex-col gap-1 items-center py-4"> */}
+         {/* <p className="text-xs"> ALl eyes here.</p>
+            <Image width={200} height={50} src={screen}></Image> */}
+         {/* <div className="w-1/2 rounded-lg h-5 screen relative"></div> */}
+         {/* </div> */}
+
+         <div className="flex w-full flex-col gap-5">
+            <ul className="flex justify-center w-full items-center gap-4">
+               {seatDetails.map((s) => (
+                  <li key={s} className="flex gap-2 items-center">
+                     <Chip
+                        color={`${s === "Sold" ? "default" : "primary"}`}
+                        radius="sm"
+                        variant={`${s === "Available" || s === "Sold" ? "flat" : "shadow"}`}
+                        isDisabled={s === "Sold"}
+                     />
+                     <span className="text-xs">{s}</span>
+                  </li>
+               ))}
+            </ul>
+
+            <div className="flex w-full justify-center">
+               <Button
+                  onPress={onOpen}
+                  variant="solid"
+                  color="success"
+                  size="sm"
+                  radius="sm"
+               >
+                  PAY
+               </Button>
+
+               <Modal
+                  isOpen={isOpen}
+                  onOpenChange={onOpenChange}
+                  className="bg-background"
+               >
+                  <ModalContent>
+                     {(onClose) => (
+                        <>
+                           <ModalHeader className="flex flex-col gap-1">
+                              Booking Summary
+                           </ModalHeader>
+                           <ModalBody className="">Ticket Summmary</ModalBody>
+                           <ModalFooter>
+                              <Button
+                                 color="danger"
+                                 variant="light"
+                                 onPress={onClose}
+                              >
+                                 Close
+                              </Button>
+                              <Button color="primary" onPress={onClose}>
+                                 Action
+                              </Button>
+                           </ModalFooter>
+                        </>
+                     )}
+                  </ModalContent>
+               </Modal>
             </div>
          </div>
-      </AppLayout>
+      </div>
    );
 };
 
