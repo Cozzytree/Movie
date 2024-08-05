@@ -1,3 +1,4 @@
+import { Button } from "@nextui-org/button";
 import {
    Navbar,
    NavbarBrand,
@@ -7,13 +8,11 @@ import {
    NavbarMenuItem,
    NavbarMenuToggle,
 } from "@nextui-org/navbar";
-import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "./sheet";
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
-import { FaHistory } from "react-icons/fa";
 import { BsList } from "react-icons/bs";
-import { Link } from "react-router-dom";
-import { Button } from "@nextui-org/button";
+import { FaHistory } from "react-icons/fa";
+import { Link, useLocation } from "react-router-dom";
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "./sheet";
 
 const routes = [
    {
@@ -75,7 +74,15 @@ const Nav = () => {
                <NavbarContent justify="center">User</NavbarContent>
             </SheetTrigger>
             <SheetContent side="right">
-               <SheetTitle className="mb-5">Username</SheetTitle>
+               <SheetTitle className="mb-5 flex flex-col">
+                  <Link to={"/my_profile"}>Username</Link>
+                  <Link
+                     to={"/my_profile/edit"}
+                     className="text-xs font-normal text-foreground-200"
+                  >
+                     edit profile
+                  </Link>
+               </SheetTitle>
 
                <ul>
                   {userSettimgs.map((u) => (

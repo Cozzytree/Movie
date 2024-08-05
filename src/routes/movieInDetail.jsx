@@ -1,14 +1,11 @@
 import { Button } from "@nextui-org/button";
 import { Chip } from "@nextui-org/chip";
 import { Image } from "@nextui-org/image";
-import { BiShare, BiStar } from "react-icons/bi";
-import { useParams } from "react-router-dom";
-import CouraselBody from "../components/scrollCourasel";
-import MovieCard from "../components/movieCard";
-import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { ScrollShadow } from "@nextui-org/scroll-shadow";
-import { Link } from "react-router-dom";
+import { BiShare, BiStar } from "react-icons/bi";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import MovieCard from "../components/movieCard";
+import CouraselBody from "../components/scrollCourasel";
 
 const MovieInDetail = () => {
    const { id, name } = useParams();
@@ -23,11 +20,10 @@ const MovieInDetail = () => {
       <div className="flex w-full h-full flex-col gap-2">
          <div className="relative w-full min-h-80 flex justify-center items-center bg-gradient-to-r from-zinc-700/5 to-accent-800/10 overflow-hidden">
             {/* {image backhround} */}
-            <div className="absolute top-0 left-0 opacity-20 w-full items-center flex justify-center h-full blur-sm">
+            <div className="absolute pointer-events-none top-0 left-0 opacity-20 w-full items-center flex justify-center h-full blur-sm">
                <Image
                   isBlurred
                   // height={700}
-                  isZoomed
                   className="object-cover mt-3 w-full h-full"
                   src="https://as1.ftcdn.net/v2/jpg/08/16/58/92/1000_F_816589242_Gt1JYNB8xlV0j6j0Uzv6hNDrbcTMoEiR.jpg"
                />

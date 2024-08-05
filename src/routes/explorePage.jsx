@@ -1,15 +1,7 @@
+import { Navbar, NavbarContent, NavbarItem } from "@nextui-org/navbar";
+import { BiSearch } from "react-icons/bi";
 import { Outlet } from "react-router-dom";
 import AppLayout from "../components/AppLayout";
-import { BiSearch } from "react-icons/bi";
-import {
-   Navbar,
-   NavbarBrand,
-   NavbarContent,
-   NavbarItem,
-   NavbarMenu,
-   NavbarMenuItem,
-   NavbarMenuToggle,
-} from "@nextui-org/navbar";
 import Nav from "../components/nav";
 
 const ExplorePage = () => {

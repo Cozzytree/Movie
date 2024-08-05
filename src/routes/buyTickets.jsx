@@ -1,9 +1,5 @@
-import AppLayout from "../components/AppLayout";
-import Nav from "../components/nav";
-import CouraselBody from "../components/scrollCourasel";
 import { Chip } from "@nextui-org/chip";
-import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Radio, RadioGroup } from "@nextui-org/radio";
 import {
    DropdownMenu,
    DropdownMenuContent,
@@ -12,10 +8,12 @@ import {
    DropdownMenuSubTrigger,
    DropdownMenuTrigger,
 } from "@radix-ui/react-dropdown-menu";
-import { Radio, RadioGroup } from "@nextui-org/radio";
-import { CgArrowRight } from "react-icons/cg";
-import { Link } from "react-router-dom";
-import { Outlet } from "react-router-dom";
+import { useState } from "react";
+import { CgArrowRight, CgClose } from "react-icons/cg";
+import { Outlet, useNavigate, useParams } from "react-router-dom";
+import AppLayout from "../components/AppLayout";
+import Nav from "../components/nav";
+import CouraselBody from "../components/scrollCourasel";
 
 const millisecondsInOneDay = 24 * 60 * 60 * 1000;
 
@@ -194,10 +192,24 @@ const filters = [
 const BuyTickets = () => {
    const params = useParams();
    const naviagate = useNavigate();
+   const [fil, setFil] = useState([]);
    // const [searchParams, setSearchParams] = useSearchParams();
    // useEffect(() => {
    //    window.scrollTo(0, 0);
    // }, [params]);
+   //
+   const handleFilter = (value) => {
+      const index = fil.findIndex((item) => item.label === value.label);
+
+      if (index === -1) {
+         setFil((prev) => [...prev, value]);
+      } else {
+         setFil((prev) => {
+            prev[index] = value;
+            return prev;
+         });
+      }
+   };
 
    const changeTimings = (t) => {
       naviagate(`/buy_tickets/movie/name-location/id/${t}`);
@@ -237,10 +249,8 @@ const BuyTickets = () => {
 
                   <div className="flex items-center gap-2 p-2 z-10">
                      <DropdownMenu>
-                        <DropdownMenuTrigger>
-                           <h4 className="flex justify-between items-center">
-                              filters <CgArrowRight />
-                           </h4>
+                        <DropdownMenuTrigger className="flex items-center outline-none focus:outline-0">
+                           filters <CgArrowRight />
                         </DropdownMenuTrigger>
                         <DropdownMenuContent>
                            {filters.map((f, i) => (
@@ -252,11 +262,19 @@ const BuyTickets = () => {
                                     <div className="bg-background">
                                        <RadioGroup
                                           color="primary"
-                                          defaultValue={f.filters[0]}
                                           className="space-y-2 p-2"
                                        >
                                           {f.filters.map((c) => (
-                                             <Radio value={c} key={c}>
+                                             <Radio
+                                                onClick={() =>
+                                                   handleFilter({
+                                                      label: f.label,
+                                                      value: c,
+                                                   })
+                                                }
+                                                value={c}
+                                                key={c}
+                                             >
                                                 {c}
                                              </Radio>
                                           ))}
@@ -268,6 +286,29 @@ const BuyTickets = () => {
                         </DropdownMenuContent>
                      </DropdownMenu>
                   </div>
+               </div>
+
+               <div className="flex items-center gap-2">
+                  {fil.length >= 0 &&
+                     fil.map((f) => (
+                        <div
+                           key={f.label}
+                           className="px-4 py-1 flex h-fit items-start gap-2 rounded-full border-1 border-foreground-200"
+                        >
+                           <div className="flex flex-col gap-1">
+                              <p className="text-xs">{f.label}</p>
+                              <span className="text-xs">{f.value}</span>
+                           </div>
+                           <CgClose
+                              cursor={"pointer"}
+                              onClick={() => {
+                                 setFil((p) => {
+                                    return p.filter((v) => v.label !== f.label);
+                                 });
+                              }}
+                           />
+                        </div>
+                     ))}
                </div>
 
                <main>

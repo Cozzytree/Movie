@@ -1,20 +1,22 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import LandingPage from "./routes/LandingPage";
-import SignUp from "./routes/Signup";
-import SeatSelection from "./routes/SeatSelectionPage";
-import MoviePage from "./routes/movie";
-import ExplorePage from "./routes/explorePage";
-import BuyTickets from "./routes/buyTickets";
-import MovieInHalls from "./routes/MovieInHalls";
-import Cenimas from "./routes/Cenimas";
-import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import "./index.css";
+import BuyTickets from "./routes/buyTickets";
+import Cenimas from "./routes/Cenimas";
+import EditProfilepage from "./routes/editProfilePage";
+import ExplorePage from "./routes/explorePage";
+import LandingPage from "./routes/LandingPage";
+import MoviePage from "./routes/movie";
+import MovieInHalls from "./routes/MovieInHalls";
+import SeatSelection from "./routes/SeatSelectionPage";
+import SignUp from "./routes/Signup";
+import UserProfilePage from "./routes/userProfile";
 // 1. import `NextUIProvider` component
 import { NextUIProvider } from "@nextui-org/react";
-import SignIn from "./routes/Signin";
 import { Navigate } from "react-router-dom";
 import MovieInDetail from "./routes/movieInDetail";
+import SignIn from "./routes/Signin";
 
 const router = createBrowserRouter([
    { element: <LandingPage />, path: "/", children: [] },
@@ -47,6 +49,15 @@ const router = createBrowserRouter([
             path: "cenima/:cenima_name/:cenima_id/:extra_details",
          },
       ],
+   },
+   {
+      element: <UserProfilePage />,
+      path: "/my_profile",
+      children: [],
+   },
+   {
+      element: <EditProfilepage />,
+      path: "/my_profile/edit",
    },
 ]);
 

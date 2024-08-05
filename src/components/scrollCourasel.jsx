@@ -15,7 +15,7 @@ const CouraselBody = ({ children, amount = 400 }) => {
    }, []);
 
    const checkPosition = (slider) => {
-      setIsAtStart(() => (slider.scrollLeft === 0 ? false : true));
+      setIsAtStart(() => (slider.scrollLeft <= 0 ? false : true));
       setIsAtEnd(() =>
          slider.scrollWidth - slider.scrollLeft === slider.clientWidth
             ? false

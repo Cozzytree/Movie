@@ -1,4 +1,4 @@
-import { Card, CardBody, CardHeader } from "@nextui-org/card";
+import { Card } from "@nextui-org/card";
 
 const Cenimas = () => {
    return (
