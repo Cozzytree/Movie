@@ -16,6 +16,7 @@ import { NextUIProvider } from "@nextui-org/react";
 import { Navigate } from "react-router-dom";
 import MovieInDetail from "./routes/movieInDetail";
 import SignIn from "./routes/Signin";
+import OrderSummary from "./routes/order_summary";
 
 const router = createBrowserRouter([
    { element: <LandingPage />, path: "/", children: [] },
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
    {
       element: <SeatSelection />,
       path: "/seat_layout/:location/:movieId/:hallId/:details",
+   },
+   {
+      element: <OrderSummary />,
+      path: "/order_summary/:movie_id/:cenima_id",
    },
    {
       element: <UserProfilePage />,

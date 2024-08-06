@@ -15,6 +15,7 @@ import screen from "../assets/screen.svg";
 import AppLayout from "../components/AppLayout";
 import Brand from "../components/brand";
 import { ScrollShadow } from "@nextui-org/scroll-shadow";
+import { useNavigate } from "react-router-dom";
 
 const days = {
    day: new Date("2024-08-01").getTime(), // August 1, 2024
@@ -27,7 +28,7 @@ const cinemaSeats = [
    {
       group: "A",
       price: 450,
-      maxInRow: 2,
+      maxInRow: 4,
       s: [
          { row: 1, seat: 1, isAvailable: true, id: 1 },
          { row: 1, seat: 2, isAvailable: false, id: 2 },
@@ -49,7 +50,7 @@ const cinemaSeats = [
    {
       group: "C",
       price: 250,
-      maxInRow: 2,
+      maxInRow: 4,
       s: [
          { row: 3, seat: 1, isAvailable: false, id: 9 },
          { row: 3, seat: 2, isAvailable: true, id: 10 },
@@ -60,13 +61,13 @@ const cinemaSeats = [
    {
       group: "D",
       price: 200,
-      maxInRow: 2,
+      maxInRow: 4,
       s: [
          { row: 4, seat: 1, isAvailable: true, id: 13 },
          { row: 4, seat: 2, isAvailable: true, id: 14 },
          { row: 4, seat: 4, isAvailable: true, id: 16 },
          { row: 4, seat: 3, isAvailable: true, id: 15 },
-         { row: 4, seat: 5, isAvailable: true, id: "dsdas" },
+         { row: 4, seat: 5, isAvailable: true, id: 16 },
       ],
    },
    {
@@ -100,7 +101,7 @@ const cinemaSeats = [
    {
       group: "F",
       price: 100,
-      maxInRow: 4,
+      maxInRow: 5,
       s: [
          { row: 7, seat: 1, isAvailable: false, id: 25 },
          { row: 7, seat: 2, isAvailable: true, id: 26 },
@@ -124,6 +125,7 @@ const cinemaSeats = [
 
 const SeatSelection = () => {
    const { isOpen, onOpen, onOpenChange } = useDisclosure();
+   const navigate = useNavigate();
    const [numOfSeats, setNumOfSeats] = useState(1);
    const {
       isOpen: openTickets,
@@ -151,7 +153,7 @@ const SeatSelection = () => {
    };
 
    return (
-      <div className="h-[100dvh] w-full bg-background sm:container flex flex-col">
+      <div className="h-[100dvh] w-full bg-background sm:container grid grid-rows-[auto_1fr_auto]">
          <div className="w-full">
             <div className="w-full flex justify-between mt-5">
                <div className="sm:flex items-center gap-2">
@@ -168,6 +170,7 @@ const SeatSelection = () => {
                >
                   {numOfSeats} Tickets
                </Button>
+
                <Modal
                   onClose={ticketsClose}
                   onOpenChange={tickestChange}
@@ -226,38 +229,37 @@ const SeatSelection = () => {
          </div>
 
          <ScrollShadow
+            orientation="vertical"
             hideScrollBar
-            className="relative overflow-auto flex flex-col justify-center items-center"
+            className="relative py-2"
          >
             {cinemaSeats.map((seat, index) => (
-               <div key={index} className="flex flex-col px-2">
-                  <span className="text-xs sm:text-sm font-normal">
+               <div key={index} className="flex flex-col px-5 py-1 relative">
+                  <span className="text-xs sm:text-sm font-normal absolute">
                      Rs. {seat.price}
                   </span>
-                  <p className="text-sm">{seat.group}</p>
-                  <div className="gap-3 w-full flex justify-center">
+                  <p className="text-sm absolute top-5 left-30">{seat.group}</p>
+                  <div className="w-full flex justify-center">
                      <ul
-                        className={`grid grid-cols-${seat.maxInRow} gap-1 mb-3`}
+                        style={{
+                           gridTemplateColumns: `repeat(${seat.maxInRow}, minmax(0, 1fr))`,
+                        }}
+                        className="grid gap-1 place-items-center"
                      >
-                        {seat.s.map((s) => (
-                           <li key={s.id} className="">
-                              <div className="w-6 h-6 sm:w-9 sm:h-9 border-1"></div>
-                              {/* <Chip
-                                 color={`${s.isAvailable ? "primary" : "default"}`}
-                                 variant={`${bookId.includes(s) ? "shadow" : "flat"}`}
-                                 radius="sm"
-                                 size="lg"
-                                 isDisabled={!s.isAvailable}
-                                 onClick={() => handleClick(s)}
-                                 className="cursor-pointer border-1 border-lime-600"
-                              >
-                                 {s.seat}
-                              </Chip> */}
+                        {seat.s.map((s, i) => (
+                           <li key={i} className="cursor-pointer">
+                              <button
+                                 disabled={!s.isAvailable}
+                                 onClick={() => {
+                                    handleClick(s);
+                                 }}
+                                 className={`${!s.isAvailable && "bg-zinc-950"} ${bookId.includes(s) ? "bg-green-500" : ""} rounded-lg w-7 h-7 sm:w-9 sm:h-9 border-1 transition-all duration-200`}
+                              ></button>
                            </li>
                         ))}
                      </ul>
                   </div>
-                  <div className="w-full border-1 mb-3 border-zinc-900/40"></div>
+                  <div className="border-1 border-foreground-800/30 pb-1"></div>
                </div>
             ))}
          </ScrollShadow>
@@ -268,33 +270,36 @@ const SeatSelection = () => {
          {/* <div className="w-1/2 rounded-lg h-5 screen relative"></div> */}
          {/* </div> */}
 
-         <div className="flex w-full flex-col gap-5">
+         <div className="flex w-full flex-col gap-5 pb-2">
             <ul className="flex justify-center w-full items-center gap-4">
                {seatDetails.map((s) => (
                   <li key={s} className="flex gap-2 items-center">
-                     <Chip
-                        color={`${s === "Sold" ? "default" : "primary"}`}
-                        radius="sm"
-                        variant={`${s === "Available" || s === "Sold" ? "flat" : "shadow"}`}
-                        isDisabled={s === "Sold"}
-                     />
+                     <button
+                        className={`${s === "Sold" && "bg-zinc-950"} ${s === "Selected" && "bg-green-500"} rounded-md sm:w-9 sm:h-9 w-7 h-7 border-1 border-foreground-400/50`}
+                     ></button>
                      <span className="text-xs">{s}</span>
                   </li>
                ))}
             </ul>
 
             <div className="flex w-full justify-center">
-               <Button
-                  onPress={onOpen}
-                  variant="solid"
-                  color="success"
-                  size="sm"
-                  radius="sm"
-               >
-                  PAY
-               </Button>
+               {bookId.length === numOfSeats && (
+                  <Button
+                     onClick={() => {
+                        navigate(`/order_summary/movieId/hallId`, {
+                           replace: true,
+                        });
+                     }}
+                     variant="solid"
+                     color="success"
+                     size="sm"
+                     radius="sm"
+                  >
+                     PAY
+                  </Button>
+               )}
 
-               <Modal
+               {/* <Modal
                   isOpen={isOpen}
                   onOpenChange={onOpenChange}
                   className="bg-background"
@@ -321,7 +326,7 @@ const SeatSelection = () => {
                         </>
                      )}
                   </ModalContent>
-               </Modal>
+               </Modal> */}
             </div>
          </div>
       </div>
