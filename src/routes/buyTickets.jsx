@@ -198,16 +198,32 @@ const BuyTickets = () => {
    const [fil, setFil] = useState([]);
 
    const handleFilter = (value) => {
-      const index = fil.findIndex((item) => item.label === value.label);
+      setFil((prev) => {
+         const index = prev.findIndex((item) => item.label === value.label);
 
-      if (index === -1) {
-         setFil((prev) => [...prev, value]);
-      } else {
-         setFil((prev) => {
-            prev[index] = value;
-            return prev;
-         });
-      }
+         if (index === -1) {
+            // Item is not in the array, so add it
+            return [...prev, value];
+         } else {
+            // Item is in the array, so update it
+            return prev.map((item, idx) =>
+               idx === index ? value : item
+            );
+         }
+      });
+      // const index = fil.findIndex((item) => item.label === value.label);
+
+
+      // if (index === -1) {
+      //    setFil((prev) => [...prev, value]);
+      // } else {
+      //    setFil((prev) => {
+      //       console.log(prev)
+      //       prev[index] = value;
+      //       console.log(prev)
+      //       return prev;
+      //    });
+      // }
    };
 
    const changeTimings = (t) => {

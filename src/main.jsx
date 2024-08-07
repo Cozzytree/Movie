@@ -15,9 +15,9 @@ import UserProfilePage from "./routes/userProfile";
 import { NextUIProvider } from "@nextui-org/react";
 import { Navigate } from "react-router-dom";
 import MovieInDetail from "./routes/movieInDetail";
-import SignIn from "./routes/Signin";
 import OrderSummary from "./routes/order_summary";
 import Orders from "./routes/orders";
+import SignIn from "./routes/Signin";
 import VerifyEmail from "./routes/verifyEmail";
 import VerifyPhone from "./routes/verifyPhone";
 

@@ -3,7 +3,6 @@ import { Input } from "@nextui-org/input";
 import { CiEdit } from "react-icons/ci";
 import { TbCameraPin } from "react-icons/tb";
 import Text from "../components/text.tsx";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const persondalD = [

@@ -10,13 +10,13 @@ const MovieCard = ({ movie }) => {
          // to={`/buy_tickets/${movie.title}-location/${movie.id}/${Date.now()}`}
          to={`/explore/movies/moviename/movieId`}
       >
-         <div className="flex flex-col justify-center items-center min-h-64 min-w-40 cursor-pointer border-1 p-2 rounded-md">
+         <div className="w-full h-full gap-2 sm:w-80 sm:h-96 grid grid-rows-[1fr_auto_auto] justify-center items-center min-h-64 min-w-40 cursor-pointer p-2">
             {movie.poster.length >= 0 ? (
                <Image
-                  width={250}
-                  height={250}
+                  width={300}
                   alt={movie.title}
-                  src={"/vite.svg"}
+                  src={"https://imgs.search.brave.com/atvfvw05GFhdH60YdfZIPmqw1GSgsT83jG173uquvco/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/bWFydmVsLmNvbS9j/b250ZW50LzF4L2Rw/M18xc2h0X2RpZ2l0/YWxfc3JnYl9rYV9z/d29yZHNfdjVfcmVz/aXplZC5qcGc"}
+                  className="aspect-square object-contain"
                />
             ) : (
                <div className="h-[80%]">
