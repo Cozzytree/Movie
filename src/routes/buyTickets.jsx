@@ -16,6 +16,8 @@ import AppLayout from "../components/AppLayout";
 import Nav from "../components/nav";
 import CouraselBody from "../components/scrollCourasel";
 
+
+
 const millisecondsInOneDay = 24 * 60 * 60 * 1000;
 
 const dates = [];
@@ -286,27 +288,30 @@ const BuyTickets = () => {
                   </div>
                </div>
 
-               <div className="flex items-center gap-2">
-                  {fil.length >= 0 &&
-                     fil.map((f) => (
-                        <div
-                           key={f.label}
-                           className="px-4 py-1 flex h-fit items-start gap-2 rounded-full border-1 border-foreground-200"
-                        >
-                           <div className="flex flex-col gap-1">
-                              <p className="text-xs">{f.label}</p>
-                              <span className="text-xs">{f.value}</span>
+               <div className="flex items-center justify-between gap-2">
+                  <CouraselBody>
+                     {fil.length >= 0 &&
+
+                        fil.map((f) => (
+                           <div
+                              key={f.label}
+                              className="w-fit rounded-lg p-1 flex h-fit items-start gap-2 border-1 border-foreground-200"
+                           >
+                              <div className="flex flex-col gap-1">
+                                 <p className="text-xs sm:text-medium">{f.label}</p>
+                                 <span className="text-xs">{f.value}</span>
+                              </div>
+                              <CgClose
+                                 cursor={"pointer"}
+                                 onClick={() => {
+                                    setFil((p) => {
+                                       return p.filter((v) => v.label !== f.label);
+                                    });
+                                 }}
+                              />
                            </div>
-                           <CgClose
-                              cursor={"pointer"}
-                              onClick={() => {
-                                 setFil((p) => {
-                                    return p.filter((v) => v.label !== f.label);
-                                 });
-                              }}
-                           />
-                        </div>
-                     ))}
+                        ))}
+                  </CouraselBody>
                </div>
 
                <main>

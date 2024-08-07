@@ -3,20 +3,20 @@ import { BiStar } from "react-icons/bi";
 import { BsImage } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
-const MovieCard = ({ clickHander, movie }) => {
+const MovieCard = ({ movie }) => {
    return (
       <Link
          className="bg-background"
-         to={`/buy_tickets/${movie.title}-location/${movie.id}/${Date.now()}`}
+         // to={`/buy_tickets/${movie.title}-location/${movie.id}/${Date.now()}`}
+         to={`/explore/movies/moviename/movieId`}
       >
-         <div className="min-h-64 min-w-36 cursor-pointer border-1 p-2 rounded-md">
+         <div className="flex flex-col justify-center items-center min-h-64 min-w-40 cursor-pointer border-1 p-2 rounded-md">
             {movie.poster.length >= 0 ? (
                <Image
-                  width={100}
-                  height={300}
-                  className="h-[80%]"
+                  width={250}
+                  height={250}
                   alt={movie.title}
-                  src={movie.poster}
+                  src={"/vite.svg"}
                />
             ) : (
                <div className="h-[80%]">

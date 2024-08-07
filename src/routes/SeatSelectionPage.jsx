@@ -253,7 +253,7 @@ const SeatSelection = () => {
                                  onClick={() => {
                                     handleClick(s);
                                  }}
-                                 className={`${!s.isAvailable && "bg-zinc-950"} ${bookId.includes(s) ? "bg-green-500" : ""} rounded-lg w-7 h-7 sm:w-9 sm:h-9 border-1 transition-all duration-200`}
+                                 className={`${!s.isAvailable && "bg-zinc-900"} ${bookId.includes(s) ? "bg-green-500" : ""} rounded-lg w-7 h-7 sm:w-9 sm:h-9 border-1 transition-all duration-200`}
                               ></button>
                            </li>
                         ))}

@@ -2,6 +2,7 @@ import { Accordion, AccordionItem } from "@nextui-org/accordion";
 import AppLayout from "../components/AppLayout";
 import { Button } from "@nextui-org/button";
 import { useState } from "react";
+import Payments from "../components/payments";
 
 const price = [
    { label: "Ticket(s) price", value: 240 },
@@ -15,30 +16,30 @@ const price = [
    },
 ];
 
-const paymentM = [
-   {
-      label: "UPI",
-      options: [{ label: "Google Pay" }, { label: "Phone Pe" }],
-   },
-   {
-      label: "Debit Card . Credit Card",
-   },
-   {
-      label: "Net Banking",
-   },
-   {
-      label: "Mobbile Wallets",
-   },
-];
+// const paymentM = [
+//    {
+//       label: "UPI",
+//       options: [{ label: "Google Pay" }, { label: "Phone Pe" }],
+//    },
+//    {
+//       label: "Debit Card . Credit Card",
+//    },
+//    {
+//       label: "Net Banking",
+//    },
+//    {
+//       label: "Mobbile Wallets",
+//    },
+// ];
 
 const OrderSummary = () => {
    const [payM, setPayM] = useState({ paymentMode: null, details: null });
    return (
       <AppLayout>
          <div className="w-full sm:w-1/2 mx-auto flex flex-col py-4 gap-5 px-2">
-            <h3 className="text-xl mb-5">Order Summary</h3>
+            <h3 className="text-xl mb-3">Order Summary</h3>
 
-            <div className="flex flex-col gap-1">
+            <div className="flex flex-col gap-1 p-3 bg-foreground-900/50 rounded-xl">
                <h4 className="flex text-sm sm:text-xl justify-between items-center">
                   Deadpool & Wolverine <span>1</span>
                </h4>
@@ -60,7 +61,7 @@ const OrderSummary = () => {
                </div>
             </div>
 
-            <ul className="flex flex-col gap-1">
+            <ul className="flex flex-col gap-1 p-3 bg-foreground-900/50 rounded-xl">
                {price.map((p, i) => (
                   <>
                      <li
@@ -109,30 +110,25 @@ const OrderSummary = () => {
             </div>
 
             <div className="w-full bg-foreground-800/20 p-3 rounded-xl">
-               <div className="flex gap-2 items-center">
-                  <h4 className="text-xl font-medium">Your Details</h4>
-                  <span className="text-sm sm:text-medium">
+               <div className="flex gap-2 items-center mb-2">
+                  <h4 className="text-sm font-medium">Your Details</h4>
+                  <span className="text-xs sm:text-medium text-foreground-400">
                      (for sending booking details)
                   </span>
+               </div>
+               <div className="w-full flex items-center gap-2 justify-between">
+                  <span className="text-sm sm:text-md">Email</span>
+                  <span className="text-xs sm:text-sm">email@.com</span>
+               </div>
+               <div className="w-full flex items-center justify-between gap-2">
+                  <span className="text-sm sm:text-md">Phone</span>
+                  <span className="text-xs sm:text-sm">12331312</span>
                </div>
             </div>
 
             <div className="w-full bg-foreground-800/20 p-3 rounded-xl">
-               <h4 className="text-xl font-medium">Payment Method</h4>
-               {paymentM.map((p, i) => (
-                  <Accordion key={i}>
-                     <AccordionItem title={p.label}>
-                        <div className="w-fit flex flex-col pl-4">
-                           {p.options &&
-                              p.options.map((v, index) => (
-                                 <button className="py-2" key={index}>
-                                    {v.label}
-                                 </button>
-                              ))}
-                        </div>
-                     </AccordionItem>
-                  </Accordion>
-               ))}
+               <h4 className="text-sm font-medium">Payment Method</h4>
+               <Payments />
             </div>
 
             <div>

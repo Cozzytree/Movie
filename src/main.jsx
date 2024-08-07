@@ -17,6 +17,9 @@ import { Navigate } from "react-router-dom";
 import MovieInDetail from "./routes/movieInDetail";
 import SignIn from "./routes/Signin";
 import OrderSummary from "./routes/order_summary";
+import Orders from "./routes/orders";
+import VerifyEmail from "./routes/verifyEmail";
+import VerifyPhone from "./routes/verifyPhone";
 
 const router = createBrowserRouter([
    { element: <LandingPage />, path: "/", children: [] },
@@ -51,11 +54,13 @@ const router = createBrowserRouter([
    {
       element: <UserProfilePage />,
       path: "/my_profile",
-      children: [],
-   },
-   {
-      element: <EditProfilepage />,
-      path: "/my_profile/edit",
+      children: [
+         { element: <Navigate to="/my_profile/edit" />, index: true },
+         { element: <EditProfilepage />, path: "edit" },
+         { element: <Orders />, path: "orders" },
+         { element: <VerifyEmail />, path: "verify/email" },
+         { element: <VerifyPhone />, path: "verify/phone" },
+      ],
    },
 ]);
 

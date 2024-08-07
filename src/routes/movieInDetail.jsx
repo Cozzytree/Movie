@@ -158,9 +158,6 @@ const MovieInDetail = () => {
                            poster: "",
                            votes: 5000,
                         }}
-                        clickHander={() => {
-                           navigate("/explore/movies/Hobbit/bhsidhasjdas");
-                        }}
                      />
                   ))}
                </CouraselBody>
