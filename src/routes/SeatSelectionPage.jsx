@@ -346,7 +346,7 @@ const SeatSelection = () => {
 
                      <TableCell className="">
                         {cenima.rows.map((r, i) => <div className="flex gap-1" key={i}>
-                           {r.map((row, i) => <button onClick={() => handleClick(row)} disabled={row.seat ? false : true} className={`${row.seat && "flex justify-center cursor-pointer items-center rounded-lg  border-1 transition-all duration-200"} w-7 h-7 sm:w-9 sm:h-9 ${bookId.includes(row) && "bg-pink-400"}`} key={i}>
+                           {r.map((row, i) => <button onClick={() => handleClick(row)} disabled={row.seat ? false : true} className={`${row.seat && "flex justify-center cursor-pointer items-center rounded-lg  border-1 transition-all duration-200"} ${!row.isAvailable && "bg-zinc-900 opacity-40"}  w-7 h-7 sm:w-9 sm:h-9 ${bookId.includes(row) && "bg-green-400 text-green-900"}`} key={i}>
                               {row.seat}
                            </button>)}
                         </div>)}
@@ -416,7 +416,7 @@ const SeatSelection = () => {
                </Modal> */}
             </div>
          </div>
-      </div>
+      </div >
    );
 };
 
