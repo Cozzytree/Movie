@@ -16,6 +16,7 @@ import AppLayout from "../components/AppLayout";
 import Brand from "../components/brand";
 import { ScrollShadow } from "@nextui-org/scroll-shadow";
 import { useNavigate } from "react-router-dom";
+import { Table, TableCell, TableHead, TableHeader, TableRow } from "../components/table";
 
 const days = {
    day: new Date("2024-08-01").getTime(), // August 1, 2024
@@ -29,99 +30,194 @@ const cinemaSeats = [
       group: "A",
       price: 450,
       maxInRow: 8,
-      s: [
-         { row: 1, seat: 1, isAvailable: true, id: 1 },
-         { row: 1, seat: 2, isAvailable: false, id: 2 },
-         { row: 1, seat: 3, isAvailable: true, id: 3 },
-         { row: 1, seat: 4, isAvailable: true, id: 4 },
-         { row: 1, seat: 5, isAvailable: true, id: "1" },
-         { row: 1, seat: 6, isAvailable: false, id: "2" },
-         { row: 1, seat: 7, isAvailable: true, id: "3" },
-         { row: 1, seat: 8, isAvailable: true, id: "4" },
-         { row: 1, seat: 1, isAvailable: true, id: "11" },
-         { row: 1, seat: 2, isAvailable: false, id: "22" },
-         { row: 1, seat: 3, isAvailable: true, id: "33" },
-         { row: 1, seat: 4, isAvailable: true, id: "44" },
-         { row: 1, seat: 5, isAvailable: true, id: "1232" },
-         { row: 1, seat: 6, isAvailable: false, id: "2asda" },
-         { row: 1, seat: 7, isAvailable: false, id: "asd3" },
-         { row: 1, seat: 8, isAvailable: true, id: "asdx4" },
+      rows: [
+         [
+            { row: 1, seat: 1, isAvailable: true, id: 1 },
+            { row: 1, seat: 2, isAvailable: false, id: 2 },
+            { row: 1, seat: 3, isAvailable: true, id: 3 },
+            { row: 1, seat: 4, isAvailable: true, id: 4 },
+            { row: 1, seat: 5, isAvailable: true, id: "1" },
+            {},
+            {},
+            {},
+            { row: 1, seat: 9, isAvailable: true, id: "1" },
+            { row: 1, seat: 10, isAvailable: false, id: "2" },
+            { row: 1, seat: 11, isAvailable: true, id: "3" },
+            { row: 1, seat: 12, isAvailable: true, id: "4" },
+         ]
       ],
    },
    {
       group: "B",
       price: 310,
       maxInRow: 4,
-      s: [
-         { row: 2, seat: 1, isAvailable: true, id: 5 },
-         { row: 2, seat: 2, isAvailable: true, id: 6 },
-         { row: 2, seat: 3, isAvailable: false, id: 7 },
-         { row: 2, seat: 4, isAvailable: true, id: 8 },
+      rows: [
+         [
+            { row: 2, seat: 1, isAvailable: true, id: 5 },
+            { row: 2, seat: 2, isAvailable: true, id: 6 },
+            { row: 2, seat: 3, isAvailable: false, id: 7 },
+            { row: 2, seat: 4, isAvailable: true, id: 8 }
+         ],
       ],
    },
    {
       group: "C",
       price: 250,
       maxInRow: 4,
-      s: [
-         { row: 3, seat: 1, isAvailable: false, id: 9 },
-         { row: 3, seat: 2, isAvailable: true, id: 10 },
-         { row: 3, seat: 3, isAvailable: true, id: 11 },
-         { row: 3, seat: 4, isAvailable: false, id: 12 },
+      rows: [
+         [
+            { row: 3, seat: 1, isAvailable: false, id: 9 },
+            { row: 3, seat: 2, isAvailable: true, id: 10 },
+            { row: 3, seat: 3, isAvailable: true, id: 11 },
+            { row: 3, seat: 4, isAvailable: false, id: 12 }
+         ],
       ],
    },
    {
       group: "D",
       price: 200,
       maxInRow: 4,
-      s: [
-         { row: 4, seat: 1, isAvailable: true, id: 13 },
-         { row: 4, seat: 2, isAvailable: true, id: 14 },
-         { row: 4, seat: 4, isAvailable: true, id: 16 },
-         { row: 4, seat: 3, isAvailable: true, id: 15 },
-         { row: 4, seat: 5, isAvailable: true, id: 16 },
+      rows: [
+         [
+            { row: 4, seat: 1, isAvailable: true, id: 13 },
+            { row: 4, seat: 2, isAvailable: true, id: 14 },
+            { row: 4, seat: 4, isAvailable: true, id: 16 },
+            { row: 4, seat: 3, isAvailable: true, id: 15 },
+            { row: 4, seat: 5, isAvailable: true, id: 16 }
+         ],
       ],
    },
    {
       group: "E",
       price: 120,
       maxInRow: 4,
-      s: [
-         { row: 5, seat: 1, isAvailable: false, id: 17 },
-         { row: 5, seat: 2, isAvailable: true, id: 18 },
-         { row: 5, seat: 3, isAvailable: true, id: 19 },
-         { row: 5, seat: 4, isAvailable: false, id: 20 },
-         { row: 5, seat: 5, isAvailable: false, id: 21 },
-         { row: 5, seat: 6, isAvailable: false, id: 22 },
-         { row: 5, seat: 7, isAvailable: false, id: 23 },
+      rows: [
+         [
+            { row: 5, seat: 1, isAvailable: false, id: 17 },
+            { row: 5, seat: 2, isAvailable: true, id: 18 },
+            { row: 5, seat: 3, isAvailable: true, id: 19 },
+            { row: 5, seat: 4, isAvailable: false, id: 20 },
+            { row: 5, seat: 5, isAvailable: false, id: 21 },
+            { row: 5, seat: 6, isAvailable: false, id: 22 },
+            { row: 5, seat: 7, isAvailable: false, id: 23 }
+         ],
       ],
    },
    {
       group: "F",
       price: 100,
       maxInRow: 4,
-      s: [
-         { row: 6, seat: 1, isAvailable: false, id: 18 },
-         { row: 6, seat: 2, isAvailable: true, id: 19 },
-         { row: 6, seat: 3, isAvailable: true, id: 20 },
-         { row: 6, seat: 4, isAvailable: false, id: 21 },
-         { row: 6, seat: 5, isAvailable: false, id: 22 },
-         { row: 6, seat: 6, isAvailable: false, id: 23 },
-         { row: 6, seat: 7, isAvailable: false, id: 24 },
+      rows: [
+         [
+            { row: 6, seat: 1, isAvailable: false, id: 18 },
+            { row: 6, seat: 2, isAvailable: true, id: 19 },
+            { row: 6, seat: 3, isAvailable: true, id: 20 },
+            { row: 6, seat: 4, isAvailable: false, id: 21 },
+            { row: 6, seat: 5, isAvailable: false, id: 22 },
+            { row: 6, seat: 6, isAvailable: false, id: 23 },
+            { row: 6, seat: 7, isAvailable: false, id: 24 }
+         ],
       ],
    },
    {
       group: "F",
       price: 100,
       maxInRow: 5,
-      s: [
-         { row: 7, seat: 1, isAvailable: false, id: 25 },
-         { row: 7, seat: 2, isAvailable: true, id: 26 },
-         { row: 7, seat: 3, isAvailable: true, id: 27 },
-         { row: 7, seat: 4, isAvailable: false, id: 28 },
-         { row: 7, seat: 5, isAvailable: false, id: 29 },
-         { row: 7, seat: 6, isAvailable: false, id: 30 },
-         { row: 7, seat: 7, isAvailable: false, id: 31 },
+      rows: [
+         [
+            { row: 7, seat: 1, isAvailable: false, id: 25 },
+            { row: 7, seat: 2, isAvailable: true, id: 26 },
+            { row: 7, seat: 3, isAvailable: true, id: 27 },
+            { row: 7, seat: 4, isAvailable: false, id: 28 },
+            { row: 7, seat: 5, isAvailable: false, id: 29 },
+            { row: 7, seat: 6, isAvailable: false, id: 30 },
+            { row: 7, seat: 7, isAvailable: false, id: 31 }
+         ],
+      ],
+   },
+   {
+      group: "G",
+      price: 450,
+      maxInRow: 8,
+      rows: [
+         [
+            { row: 1, seat: 1, isAvailable: true, id: 1 },
+            { row: 1, seat: 2, isAvailable: false, id: 2 },
+            { row: 1, seat: 3, isAvailable: true, id: 3 },
+            { row: 1, seat: 4, isAvailable: true, id: 4 },
+            { row: 1, seat: 5, isAvailable: true, id: "1" },
+            { row: 1, seat: 6, isAvailable: false, id: "2" },
+         ]
+      ],
+   },
+   {
+      group: "H",
+      price: 450,
+      maxInRow: 8,
+      rows: [
+         [
+            { row: 1, seat: 1, isAvailable: true, id: 1 },
+            { row: 1, seat: 2, isAvailable: false, id: 2 },
+            { row: 1, seat: 3, isAvailable: true, id: 3 },
+            { row: 1, seat: 4, isAvailable: true, id: 4 },
+            { row: 1, seat: 5, isAvailable: true, id: "1" },
+            { row: 1, seat: 6, isAvailable: false, id: "2" },
+            { row: 1, seat: 7, isAvailable: true, id: "3" },
+            { row: 1, seat: 8, isAvailable: true, id: "4" },
+         ]
+      ],
+   },
+   {
+      group: "I",
+      price: 450,
+      maxInRow: 8,
+      rows: [
+         [
+            { row: 1, seat: 1, isAvailable: true, id: 1 },
+            { row: 1, seat: 2, isAvailable: false, id: 2 },
+            { row: 1, seat: 3, isAvailable: true, id: 3 },
+            { row: 1, seat: 4, isAvailable: true, id: 4 },
+            { row: 1, seat: 5, isAvailable: true, id: "1" },
+            { row: 1, seat: 6, isAvailable: false, id: "2" },
+            { row: 1, seat: 7, isAvailable: true, id: "3" },
+            { row: 1, seat: 8, isAvailable: true, id: "4" },
+         ]
+      ],
+   },
+   {
+      group: "J",
+      price: 450,
+      maxInRow: 8,
+      rows: [
+         [
+            { row: 1, seat: 1, isAvailable: true, id: 1 },
+            { row: 1, seat: 2, isAvailable: false, id: 2 },
+            { row: 1, seat: 3, isAvailable: true, id: 3 },
+            { row: 1, seat: 4, isAvailable: true, id: 4 },
+            { row: 1, seat: 5, isAvailable: true, id: "1" },
+            { row: 1, seat: 6, isAvailable: false, id: "2" },
+            { row: 1, seat: 7, isAvailable: true, id: "3" },
+            { row: 1, seat: 8, isAvailable: true, id: "4" },
+         ]
+      ],
+   }, {
+      group: "K",
+      price: 450,
+      maxInRow: 8,
+      rows: [
+         [
+            { row: 1, seat: 1, isAvailable: true, id: 1 },
+            { row: 1, seat: 2, isAvailable: false, id: 2 },
+            { row: 1, seat: 3, isAvailable: true, id: 3 },
+            {},
+            {},
+            {},
+            { row: 1, seat: 4, isAvailable: true, id: 4 },
+            { row: 1, seat: 5, isAvailable: true, id: "1" },
+            { row: 1, seat: 6, isAvailable: false, id: "2" },
+            { row: 1, seat: 7, isAvailable: true, id: "3" },
+            { row: 1, seat: 8, isAvailable: true, id: "4" },
+         ]
       ],
    },
 ];
@@ -165,8 +261,8 @@ const SeatSelection = () => {
    };
 
    return (
-      <div className="h-[100dvh] w-full bg-background sm:container grid grid-rows-[auto_1fr_auto]">
-         <div className="w-full">
+      <div className="h-[100dvh] w-full bg-background grid grid-rows-[auto_1fr_auto] gap-4 overflow-hidden">
+         <div className="w-full sm:container">
             <div className="w-full flex justify-between mt-5">
                <div className="sm:flex items-center gap-2">
                   <h1 className="text-lg font-semibold">DeadPool</h1>
@@ -240,47 +336,26 @@ const SeatSelection = () => {
             </div>
          </div>
 
-         <ScrollShadow
-            orientation="vertical"
-            hideScrollBar
-            className="relative py-2"
-         >
-            {cinemaSeats.map((seat, index) => (
-               <div key={index} className="flex flex-col px-5 py-1 relative">
-                  <span className="text-xs sm:text-sm font-normal absolute">
-                     Rs. {seat.price}
-                  </span>
-                  <p className="text-sm absolute top-5 left-30">{seat.group}</p>
-                  <div className="w-full flex justify-center">
-                     <ul
-                        style={{
-                           gridTemplateColumns: `repeat(${seat.maxInRow}, minmax(0, 1fr))`,
-                        }}
-                        className="grid gap-1 place-items-center"
-                     >
-                        {seat.s.map((s, i) => (
-                           <li key={i} className="cursor-pointer">
-                              <button
-                                 disabled={!s.isAvailable}
-                                 onClick={() => {
-                                    handleClick(s);
-                                 }}
-                                 className={`${!s.isAvailable && "bg-zinc-900"} ${bookId.includes(s) ? "bg-green-500" : ""} rounded-lg w-7 h-7 sm:w-9 sm:h-9 border-1 transition-all duration-200`}
-                              ></button>
-                           </li>
-                        ))}
-                     </ul>
-                  </div>
-                  <div className="border-1 border-foreground-800/30 pb-1"></div>
-               </div>
-            ))}
-         </ScrollShadow>
+         <div className="grid grid-rows[1fr_auto] place-items-center px-3">
+            <ScrollShadow hideScrollBar className="h-full w-full sm:w-[720px] overflow-x-auto overflow-y-auto">
+               <Table className="w-full">
+                  {cinemaSeats.map((cenima, i) => <TableRow className="grid grid-cols-[auto_1fr] items-center p-0 h-10" key={i}>
+                     <TableCell className="w-10" key={i}>
+                        {cenima.group}
+                     </TableCell>
 
-         {/* // <div className="w-full flex flex-col gap-1 items-center py-4"> */}
-         {/* <p className="text-xs"> ALl eyes here.</p>
-            <Image width={200} height={50} src={screen}></Image> */}
-         {/* <div className="w-1/2 rounded-lg h-5 screen relative"></div> */}
-         {/* </div> */}
+                     <TableCell className="">
+                        {cenima.rows.map((r, i) => <div className="flex gap-1" key={i}>
+                           {r.map((row, i) => <button onClick={() => handleClick(row)} disabled={row.seat ? false : true} className={`${row.seat && "flex justify-center cursor-pointer items-center rounded-lg  border-1 transition-all duration-200"} w-7 h-7 sm:w-9 sm:h-9 ${bookId.includes(row) && "bg-pink-400"}`} key={i}>
+                              {row.seat}
+                           </button>)}
+                        </div>)}
+                     </TableCell>
+                  </TableRow>)}
+               </Table>
+            </ScrollShadow>
+            <div>All eyes in here</div>
+         </div>
 
          <div className="flex w-full flex-col gap-5 pb-2">
             <ul className="flex justify-center w-full items-center gap-4">
@@ -346,3 +421,41 @@ const SeatSelection = () => {
 };
 
 export default SeatSelection;
+
+
+
+// <div
+//    className="relative py-2 w-screen px-2 flex justify-center overflow-x-auto overflow-y-auto"
+// >
+//    <ScrollShadow className="w-fit flex flex-col gap-1">
+//       {cinemaSeats.map((seat, index) => (
+//          <div key={index} className="w-[600px] flex gap-1 relative">
+//             <span className="text-xs sm:text-sm font-normal absolute left-0">
+//                Rs. {seat.price}
+//             </span>
+//             <p className="text-sm absolute top-5 left-0">{seat.group}</p>
+//             <div className="">
+//                <ul
+//                   style={{
+//                      gridTemplateColumns: `repeat(${seat.maxInRow}, minmax(0, 1fr))`,
+//                   }}
+//                   className="grid gap-1 relative"
+//                >
+//                   {seat.s.map((s, i) => (
+//                      <li key={i} className={`cursor-pointer`}>
+//                         <button
+//                            disabled={!s.isAvailable}
+//                            onClick={() => {
+//                               handleClick(s);
+//                            }}
+//                            className={`${!s.isAvailable && "bg-zinc-900"} ${bookId.includes(s) ? "bg-green-500" : ""} rounded-lg w-6 h-6 sm:w-9 sm:h-9 border-1 transition-all duration-200`}
+//                         ></button>
+//                      </li>
+//                   ))}
+//                </ul>
+//             </div>
+//             <div className="border-1 border-foreground-800/30 pb-1"></div>
+//          </div>
+//       ))}
+//    </ScrollShadow>
+// </div>

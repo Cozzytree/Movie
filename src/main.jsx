@@ -20,6 +20,7 @@ import Orders from "./routes/orders";
 import SignIn from "./routes/Signin";
 import VerifyEmail from "./routes/verifyEmail";
 import VerifyPhone from "./routes/verifyPhone";
+import PaymentPage from "./routes/paymentPage";
 
 const router = createBrowserRouter([
    { element: <LandingPage />, path: "/", children: [] },
@@ -62,6 +63,10 @@ const router = createBrowserRouter([
          { element: <VerifyPhone />, path: "verify/phone" },
       ],
    },
+   {
+      element: <PaymentPage />,
+      path: "/payment"
+   }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

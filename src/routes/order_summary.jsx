@@ -1,8 +1,8 @@
-import { Accordion, AccordionItem } from "@nextui-org/accordion";
-import AppLayout from "../components/AppLayout";
-import { Button } from "@nextui-org/button";
 import { useState } from "react";
-import Payments from "../components/payments";
+import AppLayout from "../components/AppLayout";
+import Text from "../components/text"
+import { Button } from "@nextui-org/button";
+import { useNavigate } from "react-router-dom";
 
 const price = [
    { label: "Ticket(s) price", value: 240 },
@@ -16,128 +16,61 @@ const price = [
    },
 ];
 
-// const paymentM = [
-//    {
-//       label: "UPI",
-//       options: [{ label: "Google Pay" }, { label: "Phone Pe" }],
-//    },
-//    {
-//       label: "Debit Card . Credit Card",
-//    },
-//    {
-//       label: "Net Banking",
-//    },
-//    {
-//       label: "Mobbile Wallets",
-//    },
-// ];
-
 const OrderSummary = () => {
-   const [payM, setPayM] = useState({ paymentMode: null, details: null });
+   const [ticType, setTicType] = useState("m-type")
+   const naviagate = useNavigate()
    return (
       <AppLayout>
-         <div className="w-full sm:w-1/2 mx-auto flex flex-col py-4 gap-5 px-2">
-            <h3 className="text-xl mb-3">Order Summary</h3>
+         <div className="mt-20 w-full mx-auto sm:container px-3 flex flex-col items-center">
+            <div className="bg-foreground-800/50 w-full relative sm:w-96 rounded-xl overflow-x-hidden">
 
-            <div className="flex flex-col gap-1 p-3 bg-foreground-900/50 rounded-xl">
-               <h4 className="flex text-sm sm:text-xl justify-between items-center">
-                  Deadpool & Wolverine <span>1</span>
-               </h4>
-               <div className="flex items-center gap-2">
-                  <span className="text-xs sm:text-medium">
-                     {new Intl.DateTimeFormat("en-GB", {
-                        dateStyle: "long",
-                     }).format(Date.now())}
-                  </span>
-                  |
-                  <span className="text-xs sm:text-medium">
-                     {new Intl.DateTimeFormat("en-GB", {
-                        timeStyle: "short",
-                     }).format(Date.now())}
-                  </span>
-                  <span className="text-sm text-foreground-400">
-                     English 2d
-                  </span>
-               </div>
-            </div>
+               <div className="absolute top-1/2 -left-4 w-7 h-7 bg-background rounded-full" />
+               <div className="absolute top-1/2 -right-4 w-7 h-7 bg-background rounded-full" />
 
-            <ul className="flex flex-col gap-1 p-3 bg-foreground-900/50 rounded-xl">
-               {price.map((p, i) => (
-                  <>
-                     <li
-                        key={i}
-                        className="flex w-full items-center justify-between"
-                     >
-                        <p>{p.label}</p> <p>{p.value}</p>
+               <h3 className="px-3 py-3 text-xl mb-3 font-semibold font-mono tracking-wide uppercase text-primary-300">Booking Summary</h3>
+
+               <div className="px-4">
+                  <ul className="space-y-2">
+                     <li>
+                        <div className="flex items-center justify-between">
+                           <Text text={"Ticket name (1 ticket)"} variant="primary" />
+                           <Text text={"Rs. 220"} variant="primary" />
+                        </div>
                      </li>
-                     <ul className="pl-3 text-foreground-400">
-                        {p.details &&
-                           p.details.length >= 0 &&
-                           p.details.map((v) => (
-                              <li
-                                 key={v}
-                                 className="flex w-full justify-between"
-                              >
-                                 <p>{v.label}</p>
-                                 <p>{v.value}</p>
-                              </li>
-                           ))}
-                     </ul>
-                  </>
-               ))}
-            </ul>
+                     <li className=" flex items-center justify-between ml-2">
+                        <p>Convenience fee</p>
+                        <Text text={"Rs. 30"} variant="primary" />
+                     </li>
 
-            <div className="flex justify-between items-center border-t-1 border-foreground-800 pt-1">
-               <p className="text-md font-medium">Order Total</p>
-               <p>
-                  {price.reduce((total, current) => {
-                     // Add the current value
-                     total += current.value;
+                     <li className="flex items-center border-t-1 justify-between">
+                        <Text text={"Sub-total"} variant="primary" />
+                        <Text text={"250"} variant="primary" />
+                     </li>
+                  </ul>
 
-                     // Add nested details values if they exist
-                     if (current.details) {
-                        total += current.details.reduce(
-                           (detailTotal, detail) => {
-                              return detailTotal + detail.value;
-                           },
-                           0,
-                        );
-                     }
-
-                     return total;
-                  }, 0)}
-               </p>
-            </div>
-
-            <div className="w-full bg-foreground-800/20 p-3 rounded-xl">
-               <div className="flex gap-2 items-center mb-2">
-                  <h4 className="text-sm font-medium">Your Details</h4>
-                  <span className="text-xs sm:text-medium text-foreground-400">
-                     (for sending booking details)
-                  </span>
-               </div>
-               <div className="w-full flex items-center gap-2 justify-between">
-                  <span className="text-sm sm:text-md">Email</span>
-                  <span className="text-xs sm:text-sm">email@.com</span>
-               </div>
-               <div className="w-full flex items-center justify-between gap-2">
-                  <span className="text-sm sm:text-md">Phone</span>
-                  <span className="text-xs sm:text-sm">12331312</span>
+                  <div className="flex w-full py-2 px-1 rounded-lg justify-between items-center mt-4 font-semibold text-lg">
+                     <h5>Amount Payable</h5>
+                     <spa>Rs. 250</spa>
+                  </div>
                </div>
             </div>
 
-            <div className="w-full bg-foreground-800/20 p-3 rounded-xl">
-               <h4 className="text-sm font-medium">Payment Method</h4>
-               <Payments />
+            <div className="mt-4 w-full sm:w-96">
+               <h3 className="text-foreground-400 text-center font-mono uppercase tracking-wide font-semibold text-lg">Select ticket type</h3>
+               <div className="flex justify-between gap-2 items-center">
+                  <Button onClick={(() => setTicType("m-type"))} className="w-full" radius="sm" variant={`${ticType === "m-type" ? "solid" : "flat"}`}>M-Type</Button>
+                  <Button onClick={(() => setTicType("office-type"))} className="w-full" radius="sm" variant={`${ticType === "office-type" ? "solid" : "flat"}`}>Box-Office</Button>
+               </div>
             </div>
 
-            <div>
-               <Button variant="solid" color="success">
-                  PAY
-               </Button>
+            <div className="sm:w-96 w-full">
+               <Button onClick={() => naviagate("/payment")} className="mt-4 flex w-full justify-between" color="success" size="md" radius="sm">
+                  <span >
+                     Total Rs. 250</span> Proceed</Button>
             </div>
          </div>
       </AppLayout>
    );
 };
+
 export default OrderSummary;
