@@ -3,6 +3,7 @@ import { Chip } from "@nextui-org/chip";
 import { Image } from "@nextui-org/image";
 import { useEffect } from "react";
 import { BiShare, BiStar } from "react-icons/bi";
+import { FaPlay } from "react-icons/fa";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import MovieCard from "../components/movieCard";
 import CouraselBody from "../components/scrollCourasel";
@@ -29,8 +30,16 @@ const MovieInDetail = () => {
                />
             </div>
 
+            {/* movie details*/}
             <div className="px-1 sm:container mx-auto flex flex-col md:grid md:grid-cols-[auto_1fr_auto] gap-3">
                <div className="flex w-full justify-between relative">
+                  <div className="absolute left-0 top-0 z-20">
+                     <Button size="sm" variant="flat" startContent={<FaPlay fill="red" size={16} />}>
+                        <Link to={"#"} >
+                           Watch trailer
+                        </Link>
+                     </Button>
+                  </div>
                   <Image
                      isBlurred
                      isZoomed
@@ -49,7 +58,7 @@ const MovieInDetail = () => {
                   </div>
                </div>
 
-               <div className="z-10 py-1 space-y-2">
+               <div className="z-10 py-1 flex flex-col justify-start space-y-2 sm:space-y-3">
                   <h1 className="text-xl sm:text-3xl font-medium sm:font-semibold">
                      {name}
                   </h1>
@@ -67,11 +76,11 @@ const MovieInDetail = () => {
                      <Chip size="sm">English/Hindi</Chip>
                   </div>
 
-                  <p className="text-xs sm:text-sm">
-                     2hr - Sci/Fci, Drama - UA - 2021
+                  <p className="text-xs sm:text-sm tracking-wider space-x-2">
+                     <span> 2hr - Sci/Fci, </span> <span> Drama - UA - 2021</span>
                   </p>
 
-                  <Button variant="shadow" color="secondary" size="xs">
+                  <Button variant="shadow" color="secondary" size="sm" className="w-fit">
                      <Link
                         to={`/buy_tickets/${name}-location/${id}/${Date.now()}`}
                      >
@@ -88,6 +97,7 @@ const MovieInDetail = () => {
             </div>
          </div>
 
+         {/* anout the movie */}
          <div className="sm:container mx-auto px-1 mb-7">
             <h3 className="text-xl font-semibold py-4">About the movie</h3>
 

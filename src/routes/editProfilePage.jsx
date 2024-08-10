@@ -17,8 +17,6 @@ const persondalD = [
 ];
 
 const EditProfilepage = () => {
-
-
    return (
       <div className="w-full sm:container p-1 h-full items-center flex flex-col">
          <Card className="bg-background relative w-full sm:w-[70%] md:w-1/2 px-4 border-1 border-foreground-700">

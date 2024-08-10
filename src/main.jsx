@@ -1,26 +1,34 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { lazy } from "react";
 import "./index.css";
 import BuyTickets from "./routes/buyTickets";
 import SeatSelection from "./routes/SeatSelectionPage";
-// import Cenimas from "./routes/Cenimas";
-import EditProfilepage from "./routes/editProfilePage";
-import ExplorePage from "./routes/explorePage";
-import LandingPage from "./routes/LandingPage";
-import MoviePage from "./routes/movie";
-import SignUp from "./routes/Signup";
-import UserProfilePage from "./routes/userProfile";
-// 1. import `NextUIProvider` component
+// Lazy loading components
+const EditProfilepage = lazy(() => import('./routes/editProfilePage'));
+const ExplorePage = lazy(() => import('./routes/explorePage'));
+const LandingPage = lazy(() => import('./routes/LandingPage'));
+const MoviePage = lazy(() => import('./routes/movie'));
+const SignUp = lazy(() => import('./routes/Signup'));
+const UserProfilePage = lazy(() => import('./routes/userProfile'));
+const MovieInDetail = lazy(() => import('./routes/movieInDetail'));
+const OrderSummary = lazy(() => import('./routes/order_summary'));
+const Orders = lazy(() => import('./routes/orders'));
+const SignIn = lazy(() => import('./routes/Signin'));
+const VerifyEmail = lazy(() => import('./routes/verifyEmail'));
+const VerifyPhone = lazy(() => import('./routes/verifyPhone'));
+const PaymentPage = lazy(() => import('./routes/paymentPage'));
+const OrderConfirmed = lazy(() => import('./routes/orderConfirmedPage'));
+const AccountSettings = lazy(() => import('./routes/accountSettings'));
+const SelectRegionPage = lazy(() => import('./routes/selectRegion'));
+const LoadingPage = lazy(() => import("./routes/loadingPage"))
+const PageNotFound = lazy(() => import("./routes/pagenotFound"))
+
 import { NextUIProvider } from "@nextui-org/react";
 import { Navigate } from "react-router-dom";
-import MovieInDetail from "./routes/movieInDetail";
-import OrderSummary from "./routes/order_summary";
-import Orders from "./routes/orders";
-import SignIn from "./routes/Signin";
-import VerifyEmail from "./routes/verifyEmail";
-import VerifyPhone from "./routes/verifyPhone";
-import PaymentPage from "./routes/paymentPage";
+import { Suspense } from "react";
+import { Spinner } from "@nextui-org/spinner"
 
 const router = createBrowserRouter([
    { element: <LandingPage />, path: "/", children: [] },
@@ -61,18 +69,30 @@ const router = createBrowserRouter([
          { element: <Orders />, path: "orders" },
          { element: <VerifyEmail />, path: "verify/email" },
          { element: <VerifyPhone />, path: "verify/phone" },
+         { element: <AccountSettings />, path: "settings" }
       ],
    },
    {
       element: <PaymentPage />,
       path: "/payment"
-   }
+   },
+   {
+      element: <OrderConfirmed />,
+      path: "/order_confirmed"
+   },
+   {
+      element: <SelectRegionPage />,
+      path: "/select/region"
+   },
+   { path: "*", element: <PageNotFound /> },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
    <React.StrictMode>
       <NextUIProvider>
-         <RouterProvider router={router} />
+         <Suspense fallback={<LoadingPage />}>
+            <RouterProvider router={router} />
+         </Suspense>
       </NextUIProvider>
    </React.StrictMode>,
 );

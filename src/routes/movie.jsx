@@ -13,6 +13,7 @@ const recommended = [
       votes: 1500,
       genre: "Action",
       poster: "https://example.com/posters/deadpool.jpg",
+      languages: ["hindi", "english"]
    },
    {
       id: 2,
@@ -21,6 +22,7 @@ const recommended = [
       votes: 2500,
       genre: "Sci-Fi",
       poster: "https://example.com/posters/inception.jpg",
+      languages: ["hindi", "english"]
    },
    {
       id: 3,
@@ -29,6 +31,7 @@ const recommended = [
       votes: 3000,
       genre: "Action",
       poster: "https://example.com/posters/the_matrix.jpg",
+      languages: ["hindi", "english"]
    },
    {
       id: 4,
@@ -37,6 +40,7 @@ const recommended = [
       votes: 1800,
       genre: "Comedy",
       poster: "https://example.com/posters/grand_budapest_hotel.jpg",
+      languages: ["hindi", "english"]
    },
    {
       id: 5,
@@ -45,6 +49,7 @@ const recommended = [
       votes: 2200,
       genre: "Thriller",
       poster: "https://example.com/posters/parasite.jpg",
+      languages: ["hindi", "english"]
    },
 ];
 

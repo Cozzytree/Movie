@@ -8,7 +8,6 @@ const ExplorePage = () => {
    return (
       <AppLayout>
          <Nav />
-
          <div className="w-full px-5 flex flex-colI justify-center items-center">
             <Navbar className=" w-full">
                <NavbarContent className="w-full">

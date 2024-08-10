@@ -61,32 +61,29 @@ const movieOrders = {
    ]
 };
 
-
-
-
 const Orders = () => {
-   return <div className="w-full sm:container mx-auto px-2">
-      <div>
-         <h3 className="pb-2">
-            Upcoming
-         </h3>
-         <ul className="space-y-2 w-full sm:w-1/2 pl-3">
-            {movieOrders.upcomingOrders.map(o => <li key={o.orderId} className="border-b-1 border-foreground-800 bg-foreground-800/40 p-2 rounded-lg">
-               <h5>Order Id : {o.orderId}</h5>
-               <p>{o.movieTitle}</p>
-               <p className="flex items-center gap-2">
-                  {o.seats.length} Tickets<GiTicket />
-               </p>
-               <p className="text-sm sm:text-medium">Show time : {new Intl.DateTimeFormat("en-GB", { dateStyle: "medium", timeStyle: "short" }).format(new Date(o.showtime))}</p>
+   return <div className="w-full flex-col flex items-center mx-auto px-2">
+
+      <div className="w-full sm:container flex flex-col items-center">
+         <ul className="space-y-3 w-full sm:w-1/2">
+            {movieOrders.upcomingOrders.map(o => <li key={o.orderId} className="border-b-1 border-foreground-800/20 bg-foreground-800/20 shadow-sm shadow-foreground-800 p-2 rounded-lg text-sm">
+               <div className="w-full flex items-center justify-between border-b-1 mb-1">
+                  <p className="uppercase font-mono font-medium text-[1em] tracking-wider text-foreground-400">Order Id</p>
+                  <p className="font-semibold">{o.orderId}</p>
+               </div>
+
+               <div className="w-full flex items-center justify-between">
+                  <p>{o.movieTitle}</p>
+                  <p className="flex items-center text-[0.9em] gap-1">
+                     {o.seats.length} Tickets<GiTicket />
+                  </p>
+               </div>
+
+               <p className="text-sm sm:text-[0.9em]">Show time : {new Intl.DateTimeFormat("en-GB", { dateStyle: "medium", timeStyle: "short" }).format(new Date(o.showtime))}</p>
             </li>)}
          </ul>
       </div>
 
-      <div>
-         <h3>
-            Past Orders
-         </h3>
-      </div>
    </div>
 }
 

@@ -26,8 +26,7 @@ const routes = [
 ];
 
 const userSettimgs = [
-   { label: "Purchase History", icon: <FaHistory /> },
-   { label: "Orders", icon: <BsList /> },
+   { label: "Orders", icon: <BsList />, path: "/my_profile/orders" },
 ];
 
 const Nav = () => {
@@ -87,14 +86,16 @@ const Nav = () => {
                <ul>
                   {userSettimgs.map((u) => (
                      <li key={u.label} className="space-y-1">
-                        <Button
-                           className="border-0 w-full grid grid-cols-[1fr_auto]"
-                           variant="light"
-                           startContent={u.icon}
-                           color=""
-                        >
-                           {u.label}
-                        </Button>
+                        <Link to={u.path}>
+                           <Button
+                              className="border-0 w-full grid grid-cols-[1fr_auto]"
+                              variant="light"
+                              startContent={u.icon}
+                              color=""
+                           >
+                              {u.label}
+                           </Button>
+                        </Link>
                      </li>
                   ))}
                </ul>

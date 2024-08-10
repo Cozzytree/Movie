@@ -1,22 +1,17 @@
 import { Button } from "@nextui-org/button";
 import { Chip } from "@nextui-org/chip";
-import { Image } from "@nextui-org/image";
 import {
    Modal,
    ModalBody,
    ModalContent,
-   ModalFooter,
    ModalHeader,
    useDisclosure,
 } from "@nextui-org/modal";
-import { Ticket } from "lucide-react";
 import { useState } from "react";
-import screen from "../assets/screen.svg";
-import AppLayout from "../components/AppLayout";
-import Brand from "../components/brand";
 import { ScrollShadow } from "@nextui-org/scroll-shadow";
 import { useNavigate } from "react-router-dom";
-import { Table, TableCell, TableHead, TableHeader, TableRow } from "../components/table";
+import { Table, TableCell, TableRow } from "../components/table";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
 
 const days = {
    day: new Date("2024-08-01").getTime(), // August 1, 2024
@@ -222,14 +217,6 @@ const cinemaSeats = [
    },
 ];
 
-// {
-//    day: new Date("2024-08-02").getTime(), // August 2, 2024
-//    time: ["10:00", "12:30", "15:00"],
-// },
-// {
-//    day: new Date("2024-08-03").getTime(), // August 3, 2024
-//    time: ["8:30", "13:00", "16:00"],
-// },
 
 const SeatSelection = () => {
    const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -261,8 +248,8 @@ const SeatSelection = () => {
    };
 
    return (
-      <div className="h-[100dvh] w-full bg-background grid grid-rows-[auto_1fr_auto] gap-4 overflow-hidden">
-         <div className="w-full sm:container">
+      <div className="h-screen w-full bg-background grid grid-rows-[auto_1fr_auto] gap-4 overflow-x-hidden">
+         <div className="w-full sm:container px-2">
             <div className="w-full flex justify-between mt-5">
                <div className="sm:flex items-center gap-2">
                   <h1 className="text-lg font-semibold">DeadPool</h1>
@@ -318,21 +305,12 @@ const SeatSelection = () => {
                   }).format(days.day)}
                </p>
 
-               <select
-                  className="px-2 py-1 rounded-lg bg-primary-800 text-white"
-                  value={curTime}
-                  onChange={(e) => setCurTime(e.target.value)}
-               >
-                  {days.time.map((t) => (
-                     <option
-                        key={t}
-                        className="transition-all duration-150 bg-primary-500/40"
-                        value={t}
-                     >
-                        {t}
-                     </option>
-                  ))}
-               </select>
+               <DropdownMenu className="bg-black">
+                  <DropdownMenuTrigger className="bg-foreground-800/50 px-1 rounded-xl cursor-pointer min-w-14 tracking-wide">{curTime} </ DropdownMenuTrigger >
+                  <DropdownMenuContent className="bg-background border-1 rounded-xl overflow-hidden">
+                     {days.time.map((t, i) => <DropdownMenuItem className={`${t === curTime && "bg-foreground-700"} cursor-pointer border-b-1 px-2`} onClick={() => setCurTime(t)} key={i}>{t}</DropdownMenuItem>)}
+                  </DropdownMenuContent>
+               </DropdownMenu>
             </div>
          </div>
 
@@ -346,7 +324,7 @@ const SeatSelection = () => {
 
                      <TableCell className="">
                         {cenima.rows.map((r, i) => <div className="flex gap-1" key={i}>
-                           {r.map((row, i) => <button onClick={() => handleClick(row)} disabled={row.seat ? false : true} className={`${row.seat && "flex justify-center cursor-pointer items-center rounded-lg  border-1 transition-all duration-200"} ${!row.isAvailable && "bg-zinc-900 opacity-40"}  w-7 h-7 sm:w-9 sm:h-9 ${bookId.includes(row) && "bg-green-400 text-green-900"}`} key={i}>
+                           {r.map((row, index) => <button onClick={() => handleClick(row)} disabled={row.seat ? false : true} className={`${row.seat && "flex justify-center cursor-pointer items-center rounded-lg  border-1 transition-all duration-200"} ${!row.isAvailable && "bg-zinc-900 opacity-40"}  w-7 h-7 sm:w-9 sm:h-9 ${bookId.includes(row) && "bg-green-400 text-green-900"}`} key={index}>
                               {row.seat}
                            </button>)}
                         </div>)}
@@ -354,7 +332,7 @@ const SeatSelection = () => {
                   </TableRow>)}
                </Table>
             </ScrollShadow>
-            <div>All eyes in here</div>
+            <p className="text-xs sm:text-medium">All eyes in here</p>
          </div>
 
          <div className="flex w-full flex-col gap-5 pb-2">
@@ -362,7 +340,7 @@ const SeatSelection = () => {
                {seatDetails.map((s) => (
                   <li key={s} className="flex gap-2 items-center">
                      <button
-                        className={`${s === "Sold" && "bg-zinc-950"} ${s === "Selected" && "bg-green-500"} rounded-md sm:w-9 sm:h-9 w-7 h-7 border-1 border-foreground-400/50`}
+                        className={`${s === "Sold" && "bg-zinc-950"} ${s === "Selected" && "bg-green-500"} rounded-md sm:w-7 sm:h-7 w-6 h-6 border-1 border-foreground-400/50`}
                      ></button>
                      <span className="text-xs">{s}</span>
                   </li>
@@ -386,34 +364,6 @@ const SeatSelection = () => {
                   </Button>
                )}
 
-               {/* <Modal
-                  isOpen={isOpen}
-                  onOpenChange={onOpenChange}
-                  className="bg-background"
-               >
-                  <ModalContent>
-                     {(onClose) => (
-                        <>
-                           <ModalHeader className="flex flex-col gap-1">
-                              Booking Summary
-                           </ModalHeader>
-                           <ModalBody className="">Ticket Summmary</ModalBody>
-                           <ModalFooter>
-                              <Button
-                                 color="danger"
-                                 variant="light"
-                                 onPress={onClose}
-                              >
-                                 Close
-                              </Button>
-                              <Button color="primary" onPress={onClose}>
-                                 Action
-                              </Button>
-                           </ModalFooter>
-                        </>
-                     )}
-                  </ModalContent>
-               </Modal> */}
             </div>
          </div>
       </div >
@@ -421,41 +371,3 @@ const SeatSelection = () => {
 };
 
 export default SeatSelection;
-
-
-
-// <div
-//    className="relative py-2 w-screen px-2 flex justify-center overflow-x-auto overflow-y-auto"
-// >
-//    <ScrollShadow className="w-fit flex flex-col gap-1">
-//       {cinemaSeats.map((seat, index) => (
-//          <div key={index} className="w-[600px] flex gap-1 relative">
-//             <span className="text-xs sm:text-sm font-normal absolute left-0">
-//                Rs. {seat.price}
-//             </span>
-//             <p className="text-sm absolute top-5 left-0">{seat.group}</p>
-//             <div className="">
-//                <ul
-//                   style={{
-//                      gridTemplateColumns: `repeat(${seat.maxInRow}, minmax(0, 1fr))`,
-//                   }}
-//                   className="grid gap-1 relative"
-//                >
-//                   {seat.s.map((s, i) => (
-//                      <li key={i} className={`cursor-pointer`}>
-//                         <button
-//                            disabled={!s.isAvailable}
-//                            onClick={() => {
-//                               handleClick(s);
-//                            }}
-//                            className={`${!s.isAvailable && "bg-zinc-900"} ${bookId.includes(s) ? "bg-green-500" : ""} rounded-lg w-6 h-6 sm:w-9 sm:h-9 border-1 transition-all duration-200`}
-//                         ></button>
-//                      </li>
-//                   ))}
-//                </ul>
-//             </div>
-//             <div className="border-1 border-foreground-800/30 pb-1"></div>
-//          </div>
-//       ))}
-//    </ScrollShadow>
-// </div>
