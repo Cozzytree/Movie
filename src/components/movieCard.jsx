@@ -10,13 +10,20 @@ const MovieCard = ({ movie }) => {
          // to={`/buy_tickets/${movie.title}-location/${movie.id}/${Date.now()}`}
          to={`/explore/movies/moviename/movieId`}
       >
-         <div className="w-48 min-h-80 grid grid-rows-[1fr_auto_auto] relative bg-background">
-            {movie.poster ? <Image
-               radius="sm"
-               alt={movie.title}
-               src={"https://imgs.search.brave.com/atvfvw05GFhdH60YdfZIPmqw1GSgsT83jG173uquvco/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/bWFydmVsLmNvbS9j/b250ZW50LzF4L2Rw/M18xc2h0X2RpZ2l0/YWxfc3JnYl9rYV9z/d29yZHNfdjVfcmVz/aXplZC5qcGc"}
-               className="w-full object-contain"
-            /> : <ImageOff size={260} />}
+         <div className="w-full place-items-center min-h-80 grid grid-rows-[1fr_auto_auto] relative bg-background">
+            <div className="sm:px-2 flex justify-center w-full relative">
+               {movie.poster ? (
+                  <Image
+                     width={350}
+                     height={400}
+                     alt={movie.title}
+                     loading="lazy"
+                     src={"https://imgs.search.brave.com/atvfvw05GFhdH60YdfZIPmqw1GSgsT83jG173uquvco/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/bWFydmVsLmNvbS9j/b250ZW50LzF4L2Rw/M18xc2h0X2RpZ2l0/YWxfc3JnYl9rYV9z/d29yZHNfdjVfcmVz/aXplZC5qcGc"}
+                  />
+               ) : (
+                  <ImageOff size={250} />
+               )}
+            </div>
 
 
             <div className="w-full flex items-center justify-between z-10 p-2 bg-background">
